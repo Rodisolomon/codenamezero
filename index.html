@@ -2660,6 +2660,12 @@ function renderCatalog() {
     for (const g of FACTION_ORDER) if (g.match.test(f)) return g.key;
     return '其他';
   }
+  const EVENT_ORDER = ['rozne-war', 'longnight', 'nandao-war', 'first-quake'];
+  function sortEntries(kind, entries) {
+    if (kind !== '事件') return entries;
+    const rank = new Map(EVENT_ORDER.map((slug, index) => [slug, index]));
+    return [...entries].sort((a, b) => (rank.get(a.slug) ?? 999) - (rank.get(b.slug) ?? 999));
+  }
 
   // Build buckets
   const buckets = {}; // kind -> entries
@@ -2681,7 +2687,7 @@ function renderCatalog() {
   html += `<div class="cat-meta">TOTAL · <strong>${total}</strong> ENTRIES &nbsp;·&nbsp; ${KIND_ORDER.filter(k => buckets[k.key]).length} CATEGORIES</div>`;
 
   for (const ko of KIND_ORDER) {
-    const entries = buckets[ko.key];
+    const entries = sortEntries(ko.key, buckets[ko.key]);
     if (!entries || !entries.length) continue;
 
     html += `<section class="cat-section">`;
