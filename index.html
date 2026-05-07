@@ -1510,13 +1510,6 @@ body[data-media="L"] #var-terminal .term-storyboard {
   border: 1px dashed rgba(216,168,104,0.2);
   pointer-events: none;
 }
-#var-wiki .profile-portrait[data-glyph]::before {
-  content: attr(data-glyph);
-  font-family: var(--serif); font-size: 96px; font-weight: 500;
-  font-style: italic; letter-spacing: 0;
-  color: var(--wiki-accent); opacity: 0.7;
-  text-shadow: 0 0 32px color-mix(in srgb, var(--wiki-accent) 30%, transparent);
-}
 #var-wiki .profile-stats {
   border-top: 1px solid var(--wiki-rule);
   border-bottom: 1px solid var(--wiki-rule);
@@ -1834,7 +1827,7 @@ function esc(s) { return (s || '').toString().replace(/[<>&]/g, c => ({'<':'&lt;
 const WIKI_PAGES = {
   'yiyuan': {
     zh: '易渊', en: 'Yi Yuan', kind: '人物',
-    profile: true, glyph: '易',
+    profile: true,
     aliases: [],
     quote: '我不是人类。也不是机器。',
     fileRef: '11-OPS-Δ-0001',
@@ -1856,7 +1849,7 @@ const WIKI_PAGES = {
   },
   'lodis': {
     zh: '洛狄斯·所罗门', en: 'Lodis Solomon', kind: '人物',
-    profile: true, glyph: '洛',
+    profile: true,
     aliases: ['洛狄斯·所罗门', '洛狄斯', '蜘蛛'],
     quote: '我绝不会剥夺你成为完整的人类后，用自己自由意志做出的选择。',
     stats: [
@@ -1873,7 +1866,7 @@ const WIKI_PAGES = {
   },
   'adam': {
     zh: '亚当·索罗斯', en: 'Adam Soros', kind: '人物',
-    profile: true, glyph: '亚',
+    profile: true,
     aliases: ['亚当·索罗斯', '亚当', '黄金之子'],
     quote: '妈妈⋯我发誓，我会成为一个能自己做出选择的人类，而不是只知掠夺的野兽、只知杀戮的傀儡。',
     stats: [
@@ -1975,7 +1968,7 @@ const WIKI_PAGES = {
 
   'wenyu': {
     zh: '温瑜', en: 'Wen Yu', kind: '人物',
-    profile: true, glyph: '瑜',
+    profile: true,
     aliases: ['温瑜'],
     stats: [
       ['性别', '男'], ['年龄', '26'], ['身高', '176cm'],
@@ -1988,7 +1981,7 @@ const WIKI_PAGES = {
   },
   'alice': {
     zh: '爱丽丝·赫克托林', en: 'Alice Hectorine', kind: '人物',
-    profile: true, glyph: '爱',
+    profile: true,
     aliases: ['爱丽丝·赫克托林', '爱丽丝'],
     quote: '那里什么都没有，爱丽丝⋯',
     stats: [
@@ -2001,7 +1994,7 @@ const WIKI_PAGES = {
   },
   'wangdengyu': {
     zh: '王灯宇', en: 'Wang Dengyu', kind: '人物',
-    profile: true, glyph: '灯',
+    profile: true,
     aliases: ['王灯宇'],
     stats: [
       ['性别', '女'], ['年龄', '27'], ['身高', '175cm'],
@@ -2014,7 +2007,7 @@ const WIKI_PAGES = {
   },
   'calder': {
     zh: '叶卡尔德', en: 'Calder Ye', kind: '人物',
-    profile: true, glyph: '紫',
+    profile: true,
     aliases: ['叶卡尔德'],
     stats: [
       ['性别', '男'], ['年龄', '25'], ['身高', '187cm'],
@@ -2027,7 +2020,7 @@ const WIKI_PAGES = {
   },
   'jane': {
     zh: '简度', en: 'Jane', kind: '人物',
-    profile: true, glyph: '牵',
+    profile: true,
     aliases: ['简度'],
     stats: [
       ['性别', '女'], ['年龄', '30+'], ['身高', '168cm'],
@@ -2040,7 +2033,7 @@ const WIKI_PAGES = {
   },
   'ariana': {
     zh: '阿利安娜·亚兰', en: 'Ariana Aran', kind: '人物',
-    profile: true, glyph: '锯',
+    profile: true,
     aliases: ['阿利安娜·亚兰', '阿利安娜'],
     stats: [
       ['性别', '女'], ['年龄', '23'], ['身高', '179cm'],
@@ -2054,7 +2047,7 @@ const WIKI_PAGES = {
   },
   'june': {
     zh: '朱恩·亚兰', en: 'June Aran', kind: '人物',
-    profile: true, glyph: '锯',
+    profile: true,
     aliases: ['朱恩·亚兰', '朱恩'],
     stats: [
       ['性别', '女'], ['身高', '177cm'],
@@ -2068,7 +2061,7 @@ const WIKI_PAGES = {
   },
   'zeiden': {
     zh: '伊泽登·李·卡恩莱', en: 'Zeiden Eli Kenley', kind: '人物',
-    profile: true, glyph: '蝰',
+    profile: true,
     aliases: ['伊泽登·李·卡恩莱', '伊泽登'],
     stats: [
       ['性别', '男'], ['身高', '180cm'],
@@ -2082,7 +2075,7 @@ const WIKI_PAGES = {
   },
   'shuangchen': {
     zh: '双晨', en: 'Shuang Chen', kind: '人物',
-    profile: true, glyph: '晨',
+    profile: true,
     aliases: ['双晨'],
     stats: [
       ['性别', '女'], ['年龄', '19'], ['身高', '160cm'],
@@ -2095,7 +2088,7 @@ const WIKI_PAGES = {
 
   'yuanhe': {
     zh: '元赫', en: 'Yuan He', kind: '人物',
-    profile: true, glyph: '赫',
+    profile: true,
     aliases: ['元赫'],
     stats: [
       ['性别', '男'], ['年龄', '45'], ['身高', '191cm'],
@@ -2110,7 +2103,7 @@ const WIKI_PAGES = {
 
   'arthus': {
     zh: '阿尔瑟斯·特里斯坦', en: 'Arthus Tristan', kind: '人物',
-    profile: true, glyph: '阿',
+    profile: true,
     aliases: ['阿尔瑟斯·特里斯坦', '阿尔瑟斯', '阿尔'],
     stats: [
       ['性别', '男'], ['年龄', '25'], ['身高', '183cm'],
@@ -2123,7 +2116,7 @@ const WIKI_PAGES = {
   },
   'rene': {
     zh: '雷内·克劳塞维茨', en: 'Rene Clausewitz', kind: '人物',
-    profile: true, glyph: '雷',
+    profile: true,
     aliases: ['雷内·克劳塞维茨', '雷内'],
     stats: [
       ['性别', '男'], ['年龄', '31'], ['身高', '190cm'],
@@ -2136,7 +2129,7 @@ const WIKI_PAGES = {
   },
   'feuerhild': {
     zh: '菲尔希尔德·勒维', en: 'Feuerhild Lowe', kind: '人物',
-    profile: true, glyph: '菲',
+    profile: true,
     aliases: ['菲尔希尔德·勒维', '菲尔希尔德'],
     stats: [
       ['性别', '女'], ['年龄', '27'], ['身高', '180cm'],
@@ -2149,7 +2142,7 @@ const WIKI_PAGES = {
   },
   'hui': {
     zh: '虺', en: 'Hui', kind: '人物',
-    profile: true, glyph: '虺',
+    profile: true,
     aliases: ['虺'],
     stats: [
       ['性别', '女'], ['年龄', '未知'], ['身高', '170cm'],
@@ -2161,7 +2154,7 @@ const WIKI_PAGES = {
   },
   'pertriz': {
     zh: '珀尔翠丝·索罗斯', en: 'Pertriz Soros', kind: '人物',
-    profile: true, glyph: '珀',
+    profile: true,
     aliases: ['珀尔翠丝·索罗斯', '珀尔翠丝', '珀尔'],
     stats: [
       ['性别', '女'], ['年龄', '17'], ['身高', '167cm'],
@@ -2174,7 +2167,7 @@ const WIKI_PAGES = {
   },
   'isaak': {
     zh: '伊萨克·冯·维厄海姆', en: 'Issak Von Velhaim', kind: '人物',
-    profile: true, glyph: '冯',
+    profile: true,
     aliases: ['伊萨克·冯·维厄海姆', '伊萨克'],
     stats: [
       ['性别', '男'], ['年龄', '39'], ['身高', '190cm'],
@@ -2188,7 +2181,7 @@ const WIKI_PAGES = {
 
   'ian-noah': {
     zh: '伊恩·诺亚', en: 'Ian Noah', kind: '人物',
-    profile: true, glyph: '伊',
+    profile: true,
     aliases: ['伊恩·诺亚', '伊恩'],
     quote: '死亡是不需要练习的，因此努力活下去。',
     stats: [
@@ -2202,7 +2195,7 @@ const WIKI_PAGES = {
   },
   'ryza': {
     zh: '莱莎·诺亚', en: 'Ryza Noah', kind: '人物',
-    profile: true, glyph: '莱',
+    profile: true,
     aliases: ['莱莎·诺亚', '莱莎'],
     stats: [
       ['性别', '女'], ['身高', '160cm'],
@@ -2214,7 +2207,7 @@ const WIKI_PAGES = {
   },
   'seax': {
     zh: '6 / Seax', en: 'Six / Seax', kind: '人物',
-    profile: true, glyph: '6',
+    profile: true,
     aliases: ['6/Seax', 'Seax', '6'],
     stats: [
       ['性别', '女'], ['年龄', '21'], ['身高', '165cm'],
@@ -2226,7 +2219,7 @@ const WIKI_PAGES = {
 
   'obanu': {
     zh: '奥巴努·奥古布', en: 'Obanu Ogubu', kind: '人物',
-    profile: true, glyph: '母',
+    profile: true,
     aliases: ['奥巴努·奥古布', '奥巴努', '母亲'],
     quote: '我们变成了沉默的东西。我们变成山，变成大树，变成那些穿行在山间树中的动物们。',
     stats: [
@@ -2242,7 +2235,7 @@ const WIKI_PAGES = {
   },
   'taya': {
     zh: '塔娅', en: 'Taya', kind: '人物',
-    profile: true, glyph: '塔',
+    profile: true,
     aliases: ['塔娅'],
     stats: [
       ['性别', '女'], ['享年', '21'],
@@ -2253,7 +2246,7 @@ const WIKI_PAGES = {
   },
   'lan': {
     zh: '蓝', en: 'Lan', kind: '人物',
-    profile: true, glyph: '蓝',
+    profile: true,
     aliases: ['蓝'],
     stats: [
       ['性别', '女'], ['年龄', '24'],
@@ -2264,7 +2257,7 @@ const WIKI_PAGES = {
   },
   'sevin': {
     zh: '赛汶', en: 'Sevin', kind: '人物',
-    profile: true, glyph: '汶',
+    profile: true,
     aliases: ['赛汶'],
     stats: [
       ['性别', '男'], ['年龄', '24'],
@@ -2275,7 +2268,7 @@ const WIKI_PAGES = {
   },
   'theo': {
     zh: '泰奥·巴拉卡', en: 'Theo Baraka', kind: '人物',
-    profile: true, glyph: '泰',
+    profile: true,
     aliases: ['泰奥·巴拉卡', '泰奥'],
     stats: [
       ['性别', '男'], ['年龄', '45'],
@@ -2288,7 +2281,7 @@ const WIKI_PAGES = {
   },
   'natalie': {
     zh: '娜塔莉·所罗门', en: 'Natalie Solomon', kind: '人物',
-    profile: true, glyph: '娜',
+    profile: true,
     aliases: ['娜塔莉·所罗门', '娜塔莉', '娜塔'],
     quote: '我可以成为任何人⋯而不是被造出来的东西。',
     stats: [
@@ -3065,7 +3058,6 @@ function renderProfileHero(page, slug, summaryHtml) {
   const quote = page.quote
     ? `<div class="profile-quote">「${esc(page.quote)}」</div>`
     : '';
-  const glyph = page.glyph ? ` data-glyph="${esc(page.glyph)}"` : '';
   return `
     <div class="profile-banner">
       <span class="pb-mark">PROFILE / 档案</span>
@@ -3077,7 +3069,7 @@ function renderProfileHero(page, slug, summaryHtml) {
     <div class="wiki-page is-profile">
       <div class="profile-shell">
         <aside class="profile-side">
-          <div class="profile-portrait"${glyph}></div>
+          <div class="profile-portrait"></div>
           ${stats ? `<div class="profile-stats">${stats}</div>` : ''}
           ${quote}
         </aside>
