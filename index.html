@@ -20,16 +20,12 @@ body { font-family: var(--sans); background: #0a100a; color: #e8e8e8; -webkit-fo
 img { display: block; max-width: 100%; }
 
 .exp-toolbar {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; gap: 24px;
-  padding: 12px 28px;
-  background: rgba(8,8,8,0.92); backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex; justify-content: flex-end; align-items: center;
+  padding: 14px 28px 0;
+  background: transparent;
   font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
 }
-.exp-title { color: #d8c8a8; font-weight: 600; }
-body[data-page="yiyuan"] .exp-title { display: none; }
-.exp-tabs { display: flex; gap: 2px; margin-left: auto; }
+.exp-palette { display: flex; gap: 2px; }
 .exp-tab {
   padding: 8px 16px; background: transparent;
   border: 1px solid rgba(255,255,255,0.12); color: #8a8a8a;
@@ -38,7 +34,7 @@ body[data-page="yiyuan"] .exp-title { display: none; }
 }
 .exp-tab:hover { color: #d8c8a8; border-color: rgba(216,200,168,0.4); }
 .exp-tab.active { color: #0a0a0a; background: #d8c8a8; border-color: #d8c8a8; }
-.exp-stage { padding-top: 46px; }
+.exp-stage { padding-top: 0; }
 .exp-stage > section { display: none; }
 .exp-stage > section.active { display: block; }
 
@@ -391,7 +387,7 @@ body[data-term-pal="bone"] #var-terminal {
   --term-accent: #b3382e; --term-rec: #b3382e;
 }
 :is(#var-terminal, #var-wiki) .term-statusbar {
-  position: sticky; top: 46px; z-index: 50; margin-bottom: 0;
+  position: sticky; top: 0; z-index: 50; margin-bottom: 0;
   display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
   border-bottom: 1px solid var(--term-rule);
   font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--term-fg-dim);
@@ -1386,7 +1382,7 @@ body[data-media="L"] #var-terminal .term-storyboard {
   min-height: 100vh;
 }
 #var-wiki .wiki-topbar {
-  position: sticky; top: 87px; z-index: 40;
+  position: sticky; top: 41px; z-index: 40;
   display: flex; justify-content: space-between; align-items: center;
   padding: 12px 32px; border-bottom: 1px solid var(--wiki-rule);
   background: var(--wiki-bg-2); backdrop-filter: blur(6px);
@@ -1455,7 +1451,7 @@ body[data-media="L"] #var-terminal .term-storyboard {
   opacity: 0.92;
 }
 #var-wiki .profile-banner {
-  position: sticky; top: 46px; z-index: 35;
+  position: sticky; top: 0; z-index: 35;
   background: linear-gradient(180deg, var(--wiki-bg-2) 0%, color-mix(in srgb, var(--wiki-bg-2) 90%, transparent) 100%);
   border-bottom: 1px solid var(--wiki-rule);
   padding: 14px 48px;
@@ -1769,12 +1765,10 @@ body[data-media="L"] #var-terminal .term-storyboard {
 <body>
 
 <nav class="exp-toolbar">
-  <div class="exp-title">YI YUAN · TYPOGRAPHY EXPLORATIONS · v2</div>
-  <div style="display:flex; gap:2px;" title="Terminal palette">
+  <div class="exp-palette" title="Terminal palette">
     <button class="exp-tab exp-pal active" data-pal="olive">Olive</button>
     <button class="exp-tab exp-pal" data-pal="cobalt">Cobalt</button>
   </div>
-  <div style="margin-left:auto;"></div>
 </nav>
 
 <main class="exp-stage">
@@ -2925,13 +2919,13 @@ function renderTerminal() {
   });
 
   const topbar = `
-    <div class="term-topbar" style="position:sticky;top:46px;z-index:51;display:flex;justify-content:space-between;align-items:center;padding:8px 24px;border-bottom:1px solid var(--term-rule-soft);background:var(--term-bg-2);backdrop-filter:blur(6px);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--term-fg-dim);">
+    <div class="term-topbar" style="position:sticky;top:0;z-index:51;display:flex;justify-content:space-between;align-items:center;padding:8px 24px;border-bottom:1px solid var(--term-rule-soft);background:var(--term-bg-2);backdrop-filter:blur(6px);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--term-fg-dim);">
       <a href="#/" style="color:var(--term-accent);text-decoration:none;letter-spacing:0.22em;border-bottom:1px solid color-mix(in srgb, var(--term-accent) 40%, transparent);padding-bottom:1px;">← 词条目录 / INDEX</a>
       <span>INDEX / <strong style="color:var(--term-fg);font-weight:500;">易渊 · YI YUAN</strong></span>
     </div>
   `;
   // Push the recording status bar below the topbar
-  const statusAdjusted = status.replace('top: 46px', 'top: 79px').replace('class="term-statusbar"', 'class="term-statusbar" style="top:79px"');
+  const statusAdjusted = status.replace('top: 0', 'top: 33px').replace('class="term-statusbar"', 'class="term-statusbar" style="top:33px"');
   root.innerHTML = topbar + statusAdjusted + hero + body;
 }
 
