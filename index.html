@@ -1725,7 +1725,7 @@ body[data-media="L"] #var-terminal .term-storyboard {
 
 #var-catalog .cat-row {
   display: grid;
-  grid-template-columns: 32px 1fr 200px 80px;
+  grid-template-columns: 1fr 200px 80px;
   gap: 16px;
   padding: 10px 12px 10px 28px;
   border-bottom: 1px solid rgba(216,168,104,0.06);
@@ -1746,14 +1746,6 @@ body[data-media="L"] #var-terminal .term-storyboard {
   padding-left: 36px;
 }
 #var-catalog .cat-row:hover .cr-zh { color: var(--cat-accent); }
-#var-catalog .cr-glyph {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px; font-weight: 500;
-  color: var(--cat-accent); line-height: 1;
-  text-align: center;
-  opacity: 0.85;
-}
-#var-catalog .cr-glyph-empty { color: var(--cat-fg-dim); opacity: 0.4; }
 #var-catalog .cr-zh {
   font-family: 'Cormorant Garamond', serif;
   font-size: 22px; font-weight: 500; color: var(--cat-fg);
@@ -1774,10 +1766,10 @@ body[data-media="L"] #var-terminal .term-storyboard {
 
 @media (max-width: 700px) {
   #var-catalog .cat-row {
-    grid-template-columns: 28px 1fr;
+    grid-template-columns: 1fr;
     grid-template-rows: auto auto;
   }
-  #var-catalog .cr-en, #var-catalog .cr-tag { grid-column: 2; font-size: 10px; }
+  #var-catalog .cr-en, #var-catalog .cr-tag { grid-column: 1; font-size: 10px; text-align: left; }
 }
 </style>
 </head>
@@ -3213,9 +3205,6 @@ function renderCatalog() {
 }
 
 function renderCatalogRow(slug, page) {
-  const glyph = page.glyph
-    ? `<div class="cr-glyph">${esc(page.glyph)}</div>`
-    : `<div class="cr-glyph cr-glyph-empty">·</div>`;
   const tag = (() => {
     const t = (page.meta || []).find(([k]) => k === '关键词' || k === '身份' || k === '类型' || k === '状态' || k === '时间');
     if (t) return esc((t[1] || '').split(/[·•]/)[0].trim());
@@ -3224,7 +3213,6 @@ function renderCatalogRow(slug, page) {
     return '';
   })();
   return `<a class="cat-row" href="#/p/${slug}">
-    ${glyph}
     <div><span class="cr-zh">${esc(page.zh)}</span></div>
     <div class="cr-en">${esc(page.en || '')}</div>
     <div class="cr-tag">${tag}</div>
