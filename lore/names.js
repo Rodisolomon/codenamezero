@@ -117,10 +117,10 @@ window.NAMES = {
   },
   rossiWave: {
     zh: '罗氏波形',
-    zhFull: '罗氏波形 / 洛施波',
+    zhFull: '罗氏波',
     en: 'Rossi Waveform',
-    enFull: 'Rossi Waveform (Loshe Wave)',
-    aliases: ['罗氏波形', '洛施波', '洛施波探测', '洛施波探测器'],
+    enFull: 'Rossi Waveform',
+    aliases: ['罗氏波形','罗氏波'],
   },
   aursicht: {
     zh: '奥尔希特',
