@@ -1,0 +1,3315 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>易渊 · 排版探索 v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;600;700;900&family=Bodoni+Moda:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --serif: 'Cormorant Garamond', 'Noto Serif SC', serif;
+  --sans:  'Noto Sans SC', system-ui, sans-serif;
+  --mono:  'JetBrains Mono', ui-monospace, monospace;
+  --display:'Bodoni Moda', 'Noto Serif SC', serif;
+}
+* { box-sizing: border-box; }
+html, body { margin:0; padding:0; }
+body { font-family: var(--sans); background: #0a100a; color: #e8e8e8; -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; }
+
+.exp-toolbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; gap: 24px;
+  padding: 12px 28px;
+  background: rgba(8,8,8,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+}
+.exp-title { color: #d8c8a8; font-weight: 600; }
+.exp-tabs { display: flex; gap: 2px; margin-left: auto; }
+.exp-tab {
+  padding: 8px 16px; background: transparent;
+  border: 1px solid rgba(255,255,255,0.12); color: #8a8a8a;
+  cursor: pointer; font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+  transition: all 0.2s;
+}
+.exp-tab:hover { color: #d8c8a8; border-color: rgba(216,200,168,0.4); }
+.exp-tab.active { color: #0a0a0a; background: #d8c8a8; border-color: #d8c8a8; }
+.exp-stage { padding-top: 46px; }
+.exp-stage > section { display: none; }
+.exp-stage > section.active { display: block; }
+
+/* ============================================================
+   A · CINEMA DOSSIER — refined with full-bleed openers + media
+   ============================================================ */
+#var-cinema { background: #050505; color: #e8e2d6; }
+#var-cinema .cin-hero {
+  min-height: 100vh; padding: 80px 8vw 40px;
+  display: grid; grid-template-rows: auto 1fr auto;
+  border-bottom: 1px solid rgba(216,200,168,0.15);
+}
+#var-cinema .cin-tc {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; color: #8a7a5a;
+  display: flex; justify-content: space-between;
+}
+#var-cinema .cin-tc .tc-red { color: #b3382e; }
+#var-cinema .cin-tc .tc-red::before { content: '●'; margin-right: 6px; animation: blink 1.4s steps(2, end) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+#var-cinema .cin-name-block { align-self: center; max-width: 1200px; margin: 0 auto; width: 100%; }
+#var-cinema .cin-name-row {
+  display: grid; grid-template-columns: 200px 1fr; gap: 60px; align-items: end;
+  border-bottom: 1px solid rgba(216,200,168,0.18); padding-bottom: 48px;
+}
+#var-cinema .cin-fileid { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: #6a5a3a; line-height: 1.8; }
+#var-cinema .cin-fileid strong { color: #d8c8a8; font-weight: 600; }
+
+/* CINEMA — archive photo plate */
+#var-cinema .cin-photo-plate {
+  width: 220px; flex: none; align-self: start;
+  display: flex; flex-direction: column; gap: 10px;
+  margin-bottom: 12px;
+}
+#var-cinema .cin-photo {
+  position: relative; aspect-ratio: 4/5; width: 100%;
+  background:
+    repeating-linear-gradient(135deg, rgba(216,200,168,0.04) 0 2px, transparent 2px 6px),
+    linear-gradient(180deg, #1a1612 0%, #0c0a08 100%);
+  border: 1px solid rgba(216,200,168,0.22);
+  box-shadow: inset 0 0 60px rgba(0,0,0,0.6), 0 0 0 6px #050505, 0 0 0 7px rgba(216,200,168,0.12);
+  overflow: hidden;
+}
+#var-cinema .cin-photo::before {
+  content: ''; position: absolute; inset: 18% 22% 32% 22%;
+  background:
+    radial-gradient(ellipse 38% 28% at 50% 38%, rgba(216,200,168,0.16), transparent 70%),
+    radial-gradient(ellipse 50% 42% at 50% 78%, rgba(120,90,70,0.18), transparent 70%);
+  border-radius: 50% 50% 46% 46% / 56% 56% 44% 44%;
+}
+#var-cinema .cin-photo::after {
+  content: 'NO IMAGE ON FILE';
+  position: absolute; left: 0; right: 0; bottom: 14px;
+  text-align: center;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.32em; color: #6a5a3a;
+}
+#var-cinema .cin-photo-corner {
+  position: absolute; width: 14px; height: 14px;
+  border-color: #b8a878; border-style: solid; border-width: 0;
+}
+#var-cinema .cin-photo-corner.tl { top: 6px; left: 6px; border-top-width: 1px; border-left-width: 1px; }
+#var-cinema .cin-photo-corner.tr { top: 6px; right: 6px; border-top-width: 1px; border-right-width: 1px; }
+#var-cinema .cin-photo-corner.bl { bottom: 6px; left: 6px; border-bottom-width: 1px; border-left-width: 1px; }
+#var-cinema .cin-photo-corner.br { bottom: 6px; right: 6px; border-bottom-width: 1px; border-right-width: 1px; }
+#var-cinema .cin-photo-stamp {
+  position: absolute; right: -10px; top: 16px;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.28em; color: #b3382e;
+  border: 1px solid #b3382e; padding: 4px 8px;
+  transform: rotate(6deg); background: rgba(8,5,3,0.4);
+}
+#var-cinema .cin-photo-cap {
+  display: flex; justify-content: space-between;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em; color: #6a5a3a;
+}
+#var-cinema .cin-photo-cap strong { color: #b8a878; font-weight: 500; }
+#var-cinema .cin-zh {
+  font-family: var(--display); font-size: clamp(120px, 18vw, 280px); font-weight: 500;
+  line-height: 0.85; letter-spacing: -0.02em; margin: 0;
+  font-style: italic;
+  display: inline-block;
+  position: relative;
+  background: linear-gradient(180deg, #f4ecdc 0%, #ece4d6 50%, #b8a878 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#var-cinema .cin-zh::after {
+  content: ''; position: absolute; left: 0; bottom: -18px; height: 1px; width: 88px;
+  background: linear-gradient(90deg, #b3382e, transparent);
+}
+#var-cinema .cin-en {
+  display: flex; align-items: baseline; justify-content: space-between; margin-top: 36px;
+  font-family: var(--mono); font-size: 14px; letter-spacing: 0.32em; color: #b8a878;
+}
+#var-cinema .cin-en .en-aka { color: #6a5a3a; font-size: 11px; letter-spacing: 0.18em; }
+#var-cinema .cin-quote {
+  align-self: end; max-width: 720px; margin: 80px 0 0;
+  font-family: var(--serif); font-style: italic; font-size: 28px; line-height: 1.5;
+  color: #d8c8a8; padding-left: 40px; border-left: 2px solid #b3382e;
+}
+#var-cinema .cin-quote .q-attr {
+  margin-top: 18px; font-family: var(--mono); font-style: normal; font-size: 11px;
+  letter-spacing: 0.2em; color: #6a5a3a;
+}
+
+/* CINEMA — section opener with poster as portrait plate (left) + content (right) */
+#var-cinema .cin-opener {
+  display: grid; grid-template-columns: minmax(380px, 0.55fr) 1fr;
+  gap: 80px; padding: 80px 8vw; min-height: 100vh; align-items: stretch;
+  border-top: 1px solid rgba(216,200,168,0.18); border-bottom: 1px solid rgba(216,200,168,0.18);
+  background: #050505;
+}
+#var-cinema .cin-opener-poster {
+  position: relative; align-self: center;
+  border: 1px solid rgba(216,200,168,0.25); padding: 16px;
+  background: rgba(216,200,168,0.04);
+}
+#var-cinema .cin-opener-poster img {
+  width: 100%; height: auto; display: block;
+  filter: grayscale(0.18) contrast(1.08) brightness(1.18);
+}
+#var-cinema .cin-opener-poster-meta {
+  display: flex; justify-content: space-between; margin-top: 14px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; color: #b8a878; text-transform: uppercase;
+}
+#var-cinema .cin-opener-inner {
+  display: grid; grid-template-rows: auto 1fr auto; align-self: stretch;
+}
+#var-cinema .cin-opener-tc {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; color: #b8a878;
+  display: flex; gap: 24px; flex-wrap: wrap;
+  border-bottom: 1px solid rgba(216,200,168,0.18); padding-bottom: 16px;
+}
+#var-cinema .cin-opener-num {
+  font-family: var(--display); font-size: clamp(160px, 22vw, 320px); font-weight: 900;
+  line-height: 0.85; letter-spacing: -0.06em; color: #ece4d6;
+  align-self: center; margin: 24px 0; user-select: none;
+}
+#var-cinema .cin-opener-foot {
+  display: grid; gap: 24px;
+  border-top: 1px solid rgba(216,200,168,0.4); padding-top: 24px;
+}
+#var-cinema .cin-opener-titles {
+  display: flex; align-items: baseline; gap: 24px; flex-wrap: wrap;
+}
+#var-cinema .cin-opener-zh {
+  font-family: var(--display); font-size: clamp(56px, 7vw, 96px); font-weight: 700;
+  letter-spacing: 0.02em; color: #ece4d6;
+}
+#var-cinema .cin-opener-en {
+  font-family: var(--mono); font-size: 13px; letter-spacing: 0.3em; color: #d8c8a8;
+}
+#var-cinema .cin-opener-summary {
+  font-family: var(--serif); font-style: italic; font-size: 20px; line-height: 1.55;
+  color: #d8c8a8; max-width: 640px; text-wrap: pretty; margin: 0;
+}
+#var-cinema .cin-opener-detail { font-size: 13px; line-height: 1.85; color: #9a8a6a; max-width: 640px; text-wrap: pretty; }
+#var-cinema .cin-opener-detail p { margin: 0 0 14px; }
+#var-cinema .cin-opener-tags {
+  margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+}
+#var-cinema .cin-opener-tags span { padding: 5px 10px; border: 1px solid rgba(216,200,168,0.4); color: #d8c8a8; }
+
+/* CINEMA chapter divider (no poster) */
+#var-cinema .cin-chapter {
+  min-height: 60vh; display: grid; grid-template-rows: auto 1fr auto;
+  padding: 100px 8vw 60px; background: #000;
+  border-top: 1px solid rgba(216,200,168,0.12); border-bottom: 1px solid rgba(216,200,168,0.12);
+}
+#var-cinema .cin-chapter-meta {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; color: #6a5a3a;
+  display: flex; justify-content: space-between;
+}
+#var-cinema .cin-chapter-num {
+  font-family: var(--display); font-size: clamp(180px, 28vw, 420px); font-weight: 900;
+  line-height: 0.8; letter-spacing: -0.06em; color: rgba(216,200,168,0.06);
+  align-self: center; margin: 40px 0; user-select: none;
+}
+#var-cinema .cin-chapter-title {
+  display: flex; align-items: baseline; justify-content: space-between;
+  border-top: 1px solid rgba(216,200,168,0.18); padding-top: 24px;
+}
+#var-cinema .cin-chapter-zh {
+  font-family: var(--serif); font-size: clamp(48px, 6vw, 88px); font-weight: 600;
+  letter-spacing: 0.04em; color: #ece4d6;
+}
+#var-cinema .cin-chapter-en { font-family: var(--mono); font-size: 13px; letter-spacing: 0.28em; color: #b8a878; }
+
+/* CINEMA node */
+#var-cinema .cin-node { display: grid; padding: 80px 8vw; border-bottom: 1px solid rgba(216,200,168,0.08); }
+#var-cinema .cin-node-inner {
+  display: grid; grid-template-columns: 240px 1fr; gap: 80px; max-width: 1400px; margin: 0 auto; width: 100%;
+}
+#var-cinema .cin-side {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: #6a5a3a;
+  position: sticky; top: 80px; align-self: start;
+}
+#var-cinema .cin-side-num {
+  font-family: var(--display); font-size: 96px; font-weight: 900; line-height: 0.9;
+  letter-spacing: -0.04em; color: #b8a878; margin-bottom: 24px;
+}
+#var-cinema .cin-side .side-row {
+  border-top: 1px solid rgba(216,200,168,0.12); padding: 10px 0;
+  display: flex; justify-content: space-between; gap: 12px;
+}
+#var-cinema .cin-side .side-row span:first-child { color: #4a3a2a; }
+#var-cinema .cin-side .side-row span:last-child { color: #b8a878; text-align: right; }
+#var-cinema .cin-body { border-top: 1px solid rgba(216,200,168,0.18); padding-top: 20px; }
+#var-cinema .cin-body-meta { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; color: #6a5a3a; margin-bottom: 16px; }
+#var-cinema .cin-body-title {
+  font-family: var(--display); font-size: clamp(48px, 6vw, 88px); font-weight: 700;
+  line-height: 0.95; letter-spacing: -0.02em; color: #ece4d6; margin: 0 0 8px;
+}
+#var-cinema .cin-body-titleen { font-family: var(--mono); font-size: 12px; letter-spacing: 0.32em; color: #b8a878; margin-bottom: 36px; }
+#var-cinema .cin-body-summary { font-family: var(--serif); font-size: 22px; line-height: 1.55; color: #d8c8a8; margin: 0 0 32px; max-width: 720px; text-wrap: pretty; }
+#var-cinema .cin-body-detail { font-size: 14px; line-height: 1.85; color: #9a8a6a; max-width: 720px; text-wrap: pretty; }
+#var-cinema .cin-body-detail p { margin: 0 0 18px; }
+#var-cinema .cin-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 32px; clear: both; }
+#var-cinema .cin-tags span {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 5px 10px; border: 1px solid rgba(216,200,168,0.2); color: #b8a878;
+}
+#var-cinema .cin-quote-block {
+  margin: 36px 0; padding: 28px 0 28px 36px; border-left: 2px solid #b3382e;
+  font-family: var(--serif); font-style: italic; font-size: 22px; line-height: 1.55;
+  color: #ece4d6; max-width: 720px;
+}
+#var-cinema .cin-quote-block .qa {
+  display: block; margin-top: 14px; font-family: var(--mono); font-style: normal;
+  font-size: 11px; letter-spacing: 0.2em; color: #6a5a3a;
+}
+
+/* CINEMA portrait — base */
+#var-cinema .cin-portrait { margin: 0; }
+#var-cinema .cin-portrait img { width: 100%; height: auto; display: block; filter: grayscale(0.3) contrast(1.04); }
+#var-cinema .cin-portrait-meta {
+  display: flex; justify-content: space-between; margin-top: 10px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: #b8a878; text-transform: uppercase;
+}
+
+/* === MEDIA LAYOUT I · full-bleed interlude === */
+body[data-media="I"] #var-cinema .cin-portrait,
+body[data-media="I"] #var-cinema .cin-storyboard {
+  clear: both; float: none; width: auto; max-width: none;
+  margin: 80px -8vw; padding: 80px 8vw;
+  border-top: 1px solid rgba(216,200,168,0.18);
+  border-bottom: 1px solid rgba(216,200,168,0.18);
+  background: #000;
+}
+body[data-media="I"] #var-cinema .cin-portrait { padding: 80px 8vw; border-left: 0; border-right: 0; }
+body[data-media="I"] #var-cinema .cin-portrait img {
+  max-width: 720px; margin: 0 auto; filter: grayscale(0.2) contrast(1.05) brightness(1.05);
+}
+body[data-media="I"] #var-cinema .cin-portrait-meta {
+  max-width: 720px; margin: 18px auto 0;
+  border-top: 1px solid rgba(216,200,168,0.25); padding-top: 10px;
+}
+
+/* === MEDIA LAYOUT J · spread (image left, sticky meta right) === */
+body[data-media="J"] #var-cinema .cin-portrait {
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: start;
+  margin: 56px -120px 56px -120px;
+  padding: 0;
+}
+body[data-media="J"] #var-cinema .cin-portrait img { filter: grayscale(0.2) contrast(1.06) brightness(1.05); }
+body[data-media="J"] #var-cinema .cin-portrait-meta {
+  display: block; margin-top: 0; align-self: end;
+  border-top: 1px solid rgba(216,200,168,0.3); padding-top: 14px; line-height: 2;
+}
+body[data-media="J"] #var-cinema .cin-portrait-meta span { display: block; }
+body[data-media="J"] #var-cinema .cin-portrait-meta span:last-child { color: #ece4d6; font-size: 14px; letter-spacing: 0.16em; margin-top: 4px; }
+body[data-media="J"] #var-cinema .cin-storyboard {
+  margin: 56px -120px 56px 0;
+}
+
+/* === MEDIA LAYOUT L · clip-path layered === */
+body[data-media="L"] #var-cinema .cin-portrait {
+  position: relative; width: 380px; max-width: 100%;
+  margin: 40px 0 56px -60px; padding: 0;
+  border: 0;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 32px), calc(100% - 56px) 100%, 0 100%);
+}
+body[data-media="L"] #var-cinema .cin-portrait::before {
+  content: ''; position: absolute; top: -16px; left: -16px; right: 32px; bottom: 32px;
+  border: 1px solid rgba(179,56,46,0.5); pointer-events: none; z-index: 0;
+}
+body[data-media="L"] #var-cinema .cin-portrait img {
+  position: relative; z-index: 1; filter: grayscale(0.25) contrast(1.06) brightness(1.04);
+}
+body[data-media="L"] #var-cinema .cin-portrait-meta {
+  position: relative; z-index: 1; margin-top: 0; padding: 8px 12px;
+  background: #b3382e; color: #050505; border: 0;
+}
+body[data-media="L"] #var-cinema .cin-portrait-meta span,
+body[data-media="L"] #var-cinema .cin-portrait-meta { color: #050505; }
+body[data-media="L"] #var-cinema .cin-storyboard {
+  width: 480px; margin: 40px -60px 56px auto;
+}
+#var-cinema .cin-portrait-meta {
+  display: flex; justify-content: space-between; margin-top: 12px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: #b8a878; text-transform: uppercase;
+}
+
+/* CINEMA storyboard — 4-up frames */
+#var-cinema .cin-storyboard-base { margin: 36px 0; }
+#var-cinema .cin-sb-label {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; color: #b8a878;
+  text-transform: uppercase; margin-bottom: 14px;
+}
+#var-cinema .cin-storyboard { margin: 36px 0; }
+#var-cinema .cin-sb-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+#var-cinema .cin-sb-frame {
+  border: 1px solid rgba(216,200,168,0.2); background: rgba(216,200,168,0.04); padding: 8px;
+}
+#var-cinema .cin-sb-frame img { width: 100%; aspect-ratio: 4/3; object-fit: cover; filter: grayscale(0.3); }
+#var-cinema .cin-sb-frame-meta {
+  display: flex; justify-content: space-between; margin-top: 8px;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; color: #b8a878;
+}
+
+/* ============================================================
+   C · INDUSTRIAL TERMINAL — refined with openers + media
+   ============================================================ */
+#var-terminal {
+  background: var(--term-bg, #0c0e0c);
+  color: var(--term-fg, #c8e0c0);
+  font-family: var(--mono);
+  --term-rule: rgba(200,224,192,0.18);
+  --term-rule-soft: rgba(200,224,192,0.12);
+  --term-fg: #d8e8d0;
+  --term-fg-dim: #6a8a60;
+  --term-fg-mid: #9ab09a;
+  --term-accent: #ff6b3d;
+  --term-rec: #ff3838;
+  --term-bg: #0a100a;
+  --term-bg-2: #0c140c;
+  --term-bg-3: #060a06;
+}
+/* COBALT — cold operations, deep blue + bone */
+body[data-term-pal="cobalt"] #var-terminal {
+  --term-bg: #061224; --term-bg-2: #0a1830; --term-bg-3: #04081a;
+  --term-fg: #e8e0d0; --term-fg-mid: #9ab0c8; --term-fg-dim: #5a7898;
+  --term-rule: rgba(232,224,208,0.18); --term-rule-soft: rgba(232,224,208,0.10);
+  --term-accent: #ffb060; --term-rec: #ff5a3a;
+}
+/* BONE — bleached, near-black + cream ink */
+body[data-term-pal="bone"] #var-terminal {
+  --term-bg: #0e0d0a; --term-bg-2: #14120e; --term-bg-3: #08070a;
+  --term-fg: #ebe4d6; --term-fg-mid: #b8a890; --term-fg-dim: #6a5e4a;
+  --term-rule: rgba(235,228,214,0.18); --term-rule-soft: rgba(235,228,214,0.10);
+  --term-accent: #b3382e; --term-rec: #b3382e;
+}
+:is(#var-terminal, #var-wiki) .term-statusbar {
+  position: sticky; top: 46px; z-index: 50; margin-bottom: 0;
+  display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+  border-bottom: 1px solid var(--term-rule);
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--term-fg-dim);
+  background: var(--term-bg-2); backdrop-filter: blur(6px);
+}
+:is(#var-terminal, #var-wiki) .term-statusbar > div { padding: 10px 16px; border-right: 1px solid var(--term-rule-soft, rgba(0,0,0,0.08)); }
+:is(#var-terminal, #var-wiki) .term-statusbar strong { color: var(--term-fg, #2a2620); font-weight: 500; font-size: 12px; }
+:is(#var-terminal, #var-wiki) .term-statusbar .stat-live { color: var(--term-rec, #b3382e); }
+:is(#var-terminal, #var-wiki) .term-statusbar .stat-live::before {
+  content: '● '; color: var(--term-rec, #b3382e);
+  animation: term-blink 1.4s steps(2, end) infinite;
+}
+@keyframes term-blink { 50% { opacity: 0; } }
+
+#var-terminal .term-hero {
+  display: grid; grid-template-columns: 280px 1fr; min-height: calc(100vh - 100px);
+  border-bottom: 1px solid var(--term-rule);
+}
+#var-terminal .term-hero-left {
+  padding: 32px 24px; border-right: 1px solid var(--term-rule);
+  font-size: 11px; letter-spacing: 0.16em; line-height: 2; color: var(--term-fg-dim); background: var(--term-bg-2);
+}
+#var-terminal .term-hero-left .h-label { color: var(--term-accent); text-transform: uppercase; margin-top: 18px; }
+#var-terminal .term-hero-left .h-label:first-child { margin-top: 0; }
+#var-terminal .term-hero-left .h-val { color: var(--term-fg); font-size: 13px; letter-spacing: 0.08em; }
+#var-terminal .term-hero-right { padding: 48px; display: grid; grid-template-rows: auto 1fr auto; }
+#var-terminal .term-hero-id {
+  font-size: 12px; letter-spacing: 0.22em; color: var(--term-accent); text-transform: uppercase;
+  display: flex; justify-content: space-between;
+  border-bottom: 1px solid var(--term-rule); padding-bottom: 12px;
+}
+#var-terminal .term-hero-zh {
+  font-family: var(--serif); font-size: clamp(160px, 24vw, 360px); font-weight: 500;
+  line-height: 0.82; letter-spacing: -0.01em; color: var(--term-fg); margin: 0;
+  display: inline-block;
+  position: relative;
+  text-shadow: 0 0 32px color-mix(in srgb, var(--term-accent) 28%, transparent);
+}
+#var-terminal .term-hero-zh::before {
+  content: '/ 0'; position: absolute; right: -4px; top: -8px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em; font-weight: 400;
+  color: var(--term-accent);
+  text-shadow: none;
+}
+#var-terminal .term-hero-zh::after {
+  content: ''; position: absolute; left: 0; bottom: 6px; height: 1px; width: 64%;
+  background: linear-gradient(90deg, var(--term-accent), transparent);
+  opacity: 0.5;
+}
+#var-terminal .term-hero-en {
+  display: flex; align-items: baseline; gap: 24px; margin-top: 24px;
+  border-top: 1px solid var(--term-rule); padding-top: 16px;
+  font-size: 15px; letter-spacing: 0.32em; color: var(--term-accent);
+}
+#var-terminal .term-hero-en .en-aka { color: var(--term-fg-dim); font-size: 12px; letter-spacing: 0.18em; }
+#var-terminal .term-hero-quote {
+  font-family: var(--serif); font-style: italic; font-size: 26px; line-height: 1.5;
+  color: var(--term-accent); border-left: 2px solid var(--term-accent); padding-left: 24px; max-width: 640px;
+}
+#var-terminal .term-hero-quote .qa {
+  display: block; margin-top: 14px; font-family: var(--mono); font-style: normal;
+  font-size: 11px; letter-spacing: 0.2em; color: var(--term-fg-dim); text-transform: uppercase;
+}
+
+/* TERMINAL — full-bleed opener with poster mounted in CRT-style frame */
+#var-terminal .term-opener {
+  display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh;
+  border-bottom: 1px solid var(--term-rule); background: var(--term-bg-3);
+}
+#var-terminal .term-opener-img {
+  position: relative; overflow: hidden;
+  border-right: 1px solid var(--term-rule);
+  background-size: cover; background-position: center;
+}
+#var-terminal .term-opener-img {
+  filter: brightness(1.2) contrast(1.05);
+  animation: term-crt-flicker 5.7s steps(60) infinite;
+}
+/* Static scanlines + vignette (always on) */
+#var-terminal .term-opener-img::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 2px, rgba(0,0,0,0.12) 2px 3px),
+    radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.45) 100%);
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+/* Animated horizontal sweep + drifting scanline pattern — pseudo-element on a wrapper class */
+#var-terminal .term-opener-img {
+  --crt-shift: 0px;
+}
+#var-terminal .term-opener-img::after {
+  z-index: 2;
+}
+#var-terminal .term-opener-img > .term-crt-overlay {
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,0.025) 3px 4px);
+  background-size: 100% 4px;
+  background-repeat: repeat;
+  background-position: 0 0;
+  animation: term-crt-scanlines 4.2s linear infinite;
+  mix-blend-mode: screen;
+  opacity: 0.55;
+}
+@keyframes term-crt-scanlines {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 4px; }
+}
+@keyframes term-crt-flicker {
+  0%, 100% { filter: brightness(1.20) contrast(1.05); }
+  4%       { filter: brightness(1.30) contrast(1.08); }
+  5%       { filter: brightness(1.10) contrast(1.02); }
+  6%       { filter: brightness(1.26) contrast(1.07); }
+  18%      { filter: brightness(1.14) contrast(1.03); }
+  22%      { filter: brightness(1.28) contrast(1.07); }
+  44%      { filter: brightness(1.13) contrast(1.03); }
+  46%      { filter: brightness(1.30) contrast(1.08); }
+  47%      { filter: brightness(1.18) contrast(1.04); }
+  62%      { filter: brightness(1.27) contrast(1.07); }
+  72%      { filter: brightness(1.12) contrast(1.03); }
+  86%      { filter: brightness(1.10) contrast(1.02); }
+  87%      { filter: brightness(1.32) contrast(1.09); }
+  88%      { filter: brightness(1.16) contrast(1.04); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #var-terminal .term-opener-img,
+  #var-terminal .term-opener-img > .term-crt-overlay {
+    animation: none !important;
+  }
+}
+#var-terminal .term-opener-img::after {
+  content: 'IMG REF · ' attr(data-ref);
+  position: absolute; left: 16px; bottom: 16px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; color: var(--term-accent);
+  text-transform: uppercase;
+  background: color-mix(in srgb, var(--term-bg-3) 70%, transparent); padding: 4px 8px;
+  border: 1px solid color-mix(in srgb, var(--term-accent) 40%, transparent);
+}
+#var-terminal .term-opener-mid { padding: 60px 48px; display: grid; grid-template-rows: auto 1fr auto; }
+#var-terminal .term-opener-meta {
+  display: flex; justify-content: space-between; font-size: 11px; letter-spacing: 0.22em;
+  color: var(--term-accent); text-transform: uppercase;
+  border-bottom: 1px solid var(--term-rule); padding-bottom: 14px;
+}
+#var-terminal .term-opener-num {
+  font-family: var(--sans); font-size: clamp(180px, 24vw, 360px); font-weight: 900;
+  line-height: 0.85; letter-spacing: -0.06em; color: var(--term-fg); align-self: center; margin: 32px 0;
+}
+#var-terminal .term-opener-logo {
+  display: flex; align-items: center; gap: 18px;
+  padding: 18px 0 0; border-top: none;
+  margin-top: 4px;
+}
+#var-terminal .term-opener-logo img {
+  width: 88px; height: 88px; object-fit: contain;
+  filter: drop-shadow(0 0 12px color-mix(in srgb, var(--term-accent) 35%, transparent));
+}
+#var-terminal .term-opener-logo-cap { display: grid; gap: 4px; }
+#var-terminal .term-opener-logo-zh {
+  font-family: var(--sans); font-size: 14px; letter-spacing: 0.18em;
+  color: var(--term-fg); font-weight: 600;
+}
+#var-terminal .term-opener-logo-en {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em;
+  color: var(--term-accent); text-transform: uppercase;
+}
+#var-terminal .term-opener-titles {
+  border-top: 1px solid var(--term-rule); padding-top: 18px;
+}
+#var-terminal .term-opener-zh {
+  font-family: var(--sans); font-size: clamp(40px, 5vw, 64px); font-weight: 800;
+  letter-spacing: 0.02em; color: var(--term-fg); margin: 0 0 6px;
+}
+#var-terminal .term-opener-en { font-size: 12px; letter-spacing: 0.3em; color: var(--term-accent); margin-bottom: 24px; }
+#var-terminal .term-opener-summary {
+  font-family: var(--serif); font-size: 20px; line-height: 1.55; color: var(--term-fg);
+  margin: 0 0 18px; text-wrap: pretty;
+}
+#var-terminal .term-opener-summary p { margin: 0 0 14px; }
+#var-terminal .term-opener-detail {
+  font-size: 12px; line-height: 1.85; color: var(--term-fg-dim); text-wrap: pretty;
+}
+#var-terminal .term-opener-detail p { margin: 0 0 10px; }
+#var-terminal .term-opener-tags {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px;
+  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--term-accent);
+}
+#var-terminal .term-opener-tags span { padding: 4px 10px; border: 1px solid color-mix(in srgb, var(--term-accent) 30%, transparent); }
+
+/* TERMINAL chapter-block — wraps each chapter */
+#var-terminal .term-chapter-block { position: relative; }
+
+/* TERMINAL faction span — groups consecutive same-faction chapters */
+#var-terminal .term-faction-span { position: relative; }
+
+/* Faction span: the mark sticks for the WHOLE span, morphs from large→banner */
+#var-terminal .term-faction-span { position: relative; }
+#var-terminal .term-faction-spacer {
+  height: 373px; /* gives banner ~720px total morph distance (mark height ~347 + spacer 373) before chapters appear */
+  pointer-events: none;
+}
+#var-terminal .term-faction-hero {
+  display: none;
+}
+/* The mark is a direct child of .term-faction-span — sticks for the whole span.
+   Inline CSS var --p (0..1) drives smooth scroll-progress interpolation. */
+#var-terminal .term-faction-mark {
+  --p: 0;
+  position: sticky; top: 98px; z-index: 30;
+  display: flex; flex-direction: row; align-items: center; justify-content: center;
+  gap: calc(28px - 12px * var(--p));
+  padding: calc(28px - 22px * var(--p)) 28px;
+  background: var(--term-bg);
+  border-bottom: 1px solid color-mix(in srgb, var(--term-rule) calc(100% * var(--p)), transparent);
+  will-change: padding, gap;
+}
+#var-terminal .term-faction-mark img {
+  width: calc(280px - 244px * var(--p)); /* 280 → 36 */
+  height: auto;
+  filter: drop-shadow(0 0 calc(24px - 18px * var(--p)) color-mix(in srgb, var(--term-accent) 35%, transparent));
+}
+#var-terminal .faction-visgant .term-faction-mark img,
+#var-terminal .faction-cu .term-faction-mark img {
+  filter: drop-shadow(0 0 calc(32px - 24px * var(--p)) color-mix(in srgb, #d4a23a 50%, transparent));
+}
+#var-terminal .term-faction-cap {
+  display: flex; align-items: flex-start;
+  flex-direction: column;
+  gap: calc(8px - 4px * var(--p));
+  text-align: left;
+}
+#var-terminal .term-faction-zh {
+  font-family: var(--sans);
+  font-size: calc(30px - 18px * var(--p));
+  letter-spacing: calc(0.32em - 0.10em * var(--p));
+  color: var(--term-fg); font-weight: 600;
+}
+#var-terminal .term-faction-en {
+  font-family: var(--mono);
+  font-size: calc(12px - 2px * var(--p));
+  letter-spacing: calc(0.40em - 0.12em * var(--p));
+  color: var(--term-accent); text-transform: uppercase;
+}
+
+/* HIVE — ominous blood red overrides (chapter VI) */
+#var-terminal .term-chapter-block.is-hive {
+  --hive-red: #8a1f1a;
+  --hive-red-bright: #c0322a;
+}
+#var-terminal .term-chapter-block.is-hive .term-chapter-zh,
+#var-terminal .term-chapter-block.is-hive .term-chapter-num,
+#var-terminal .term-chapter-block.is-hive .term-opener-zh,
+#var-terminal .term-chapter-block.is-hive .term-opener-num,
+#var-terminal .term-chapter-block.is-hive .term-node-zh {
+  color: var(--hive-red-bright);
+  text-shadow: 0 0 18px color-mix(in srgb, var(--hive-red) 60%, transparent);
+}
+#var-terminal .term-chapter-block.is-hive .term-chapter-en,
+#var-terminal .term-chapter-block.is-hive .term-opener-en,
+#var-terminal .term-chapter-block.is-hive .term-node-en {
+  color: var(--hive-red);
+}
+
+/* ===================== EPILOGUE — chapter IX (dawn after sea of light) ===================== */
+/* Sea-of-light: gracefully dissolve the last chapter's bottom edge into the
+   epilogue's deep navy, so there's no horizontal seam.  Apply a bottom-fade
+   gradient overlay to every sea-of-light chapter-inner — only the last one is
+   visible at the boundary, but it's invisible mid-section because the next
+   chapter covers it. */
+#var-terminal .term-chapter-block.is-sealight {
+  position: relative;
+  isolation: isolate;
+}
+#var-terminal .term-chapter-block.is-sealight::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 280px;
+  pointer-events: none; z-index: 4;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(2,6,13,0.0)  20%,
+    rgba(2,6,13,0.45) 55%,
+    rgba(2,6,13,0.9)  85%,
+    #02060d 100%);
+}
+
+/* ===== EPILOGUE / 余生 — Sea-of-Light continuation, dawn rising =====
+   Continues the sea-of-light bone/cyan palette but slowly warms and brightens — the sea-of-light bone/cyan palette but slowly warms and brightens —
+   from deep ghost blue at the top to a soft pre-dawn warm bone-cream at the bottom.
+   No faction banner (rendered outside spans), no node grid, no terminal chrome.
+   Sticky status bar fades out when entering — feels like leaving the archive. */
+#var-terminal .term-chapter-block.is-epilogue {
+  --epi-deep:  #02060d;   /* matches sea-of-light end at top — seamless join */
+  --epi-mid:   #0a1828;   /* sea-of-light deep blue */
+  --epi-warm:  #1a2438;
+  --epi-dawn:  #2a2a32;
+  --epi-bone:  #d8d2c4;
+  --epi-bone-soft: rgba(216,210,196,0.62);
+  --epi-bone-faint: rgba(216,210,196,0.32);
+  background: linear-gradient(
+    180deg,
+    var(--epi-deep)  0%,
+    var(--epi-deep) 12%,
+    var(--epi-mid)  30%,
+    var(--epi-warm) 60%,
+    var(--epi-dawn) 100%
+  );
+  padding: 280px 0 320px;
+  position: relative;
+  isolation: isolate;
+}
+/* Soft horizontal tide bands carried over from ghost mode — fading as we descend.
+   ::before starts FROM 280px down so the epilogue's first 280px is pure --epi-deep
+   matching the sea-of-light fade-to color exactly — no horizontal seam. */
+#var-terminal .term-chapter-block.is-epilogue::before {
+  content: '';
+  position: absolute; left: 0; right: 0;
+  top: 280px; bottom: 0;
+  pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 30% at 50% 0%, rgba(180,230,250,0.10) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 40% at 50% 100%, rgba(232,210,170,0.10) 0%, transparent 70%);
+}
+/* Removed the ::after horizontal hairline — replaced with two vertical dissolve traces */
+#var-terminal .term-chapter-block.is-epilogue::after {
+  content: '';
+  position: absolute; left: 0; right: 0; top: 0; height: 240px;
+  pointer-events: none;
+  background:
+    /* Two narrow vertical light shafts that dissolve from sea-of-light tide into nothing */
+    linear-gradient(180deg, rgba(180,230,250,0.18) 0%, transparent 100%) left  20% / 1px 100% no-repeat,
+    linear-gradient(180deg, rgba(180,230,250,0.18) 0%, transparent 100%) right 20% / 1px 100% no-repeat;
+}
+#var-terminal .term-chapter-block.is-epilogue .term-chapter-inner {
+  background: transparent;
+  border: 0;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 48px;
+  position: relative;
+  z-index: 1;
+}
+#var-terminal .term-epilogue {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  position: relative;
+}
+/* Sealed-envelope opening device: a single small mark, no rule */
+#var-terminal .term-epilogue-rule {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(216,210,196,0.55);
+  box-shadow: 0 0 18px rgba(180,230,250,0.5);
+  margin: 0 0 88px;
+}
+#var-terminal .term-epilogue-meta {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.4em;
+  color: rgba(180,230,250,0.45); text-transform: uppercase;
+  margin-bottom: 64px;
+}
+/* Stylish display title: oversize serif italic, generous tracking, soft halo */
+#var-terminal .term-epilogue-zh {
+  font-family: var(--serif, var(--sans));
+  font-weight: 300; font-style: italic;
+  font-size: clamp(72px, 8vw, 104px);
+  letter-spacing: 0.1em;
+  line-height: 1;
+  color: #f0eadc;
+  margin: 0 0 18px;
+  text-shadow:
+    0 0 30px rgba(180,230,250,0.18),
+    0 0 80px rgba(232,210,170,0.10);
+}
+#var-terminal .term-epilogue-en {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.5em;
+  color: rgba(216,222,228,0.42); text-transform: uppercase;
+  margin-bottom: 96px;
+}
+#var-terminal .term-epilogue-summary {
+  font-family: var(--serif, var(--sans));
+  font-size: 19px; line-height: 2.0; font-weight: 300;
+  color: #ece6d6; letter-spacing: 0.03em;
+  max-width: 540px; margin: 0 auto 56px;
+  text-align: center;
+}
+/* First-letter drop accent for summary — subtle but elevating */
+#var-terminal .term-epilogue-summary::first-letter {
+  font-style: italic;
+  color: #f6efde;
+}
+#var-terminal .term-epilogue-detail {
+  font-family: var(--sans); font-size: 14px; line-height: 2.15;
+  color: rgba(220,212,196,0.78); letter-spacing: 0.04em;
+  max-width: 540px; margin: 0 auto;
+  text-align: left;
+}
+#var-terminal .term-epilogue-detail p { margin: 0 0 26px; }
+#var-terminal .term-epilogue-detail p:last-child { margin-bottom: 0; }
+/* Pull quote — large italic serif, no chrome, just air */
+#var-terminal .term-epilogue-quote {
+  font-family: var(--serif, var(--sans));
+  font-style: italic; font-weight: 300;
+  font-size: 22px; line-height: 1.6; letter-spacing: 0.04em;
+  color: rgba(240,232,212,0.88); text-transform: none;
+  border: 0; padding: 96px 0 0; margin: 0 auto;
+  max-width: 520px; text-align: center;
+  position: relative;
+}
+#var-terminal .term-epilogue-quote::before {
+  content: '“';
+  display: block;
+  font-family: var(--serif, var(--sans));
+  font-style: italic; font-weight: 300;
+  font-size: 80px; line-height: 0.4;
+  color: rgba(216,210,196,0.32);
+  margin-bottom: 28px;
+}
+#var-terminal .term-epilogue-quote .qa {
+  display: block; margin-top: 28px;
+  font-family: var(--mono); font-size: 10px;
+  font-style: normal;
+  color: rgba(232,222,200,0.42); letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+#var-terminal .term-epilogue-end {
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.6em;
+  color: rgba(232,222,200,0.32); text-transform: uppercase;
+  margin-top: 160px;
+  display: flex; align-items: center; gap: 20px;
+}
+#var-terminal .term-epilogue-end::before,
+#var-terminal .term-epilogue-end::after {
+  content: ''; width: 80px; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(232,222,200,0.28), transparent);
+}
+
+/* When epilogue is in view, fade the sticky status bar + faction banners */
+#var-terminal.is-epilogue-active .term-statusbar,
+#var-terminal.is-epilogue-active .term-faction-mark {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.4s ease-out;
+}
+#var-terminal .term-statusbar,
+#var-terminal .term-faction-mark {
+  transition: opacity 0.6s ease-in;
+}
+
+/* ===================== SEA OF LIGHT — chapter VIII ===================== */
+/* Three terminal-native modes — keeps the typeface system (sans + mono),
+   adds cinematic CRT effects to elevate the finale. */
+
+#var-terminal .term-chapter-block.is-sealight {
+  --sl-bone: #e8eef5;
+  --sl-cyan: #6fc8e0;
+  --sl-deep: #050a16;
+  position: relative;
+}
+#var-terminal .term-chapter-block.is-sealight .term-faction-mark img,
+#var-terminal .term-chapter-block.is-sealight .term-opener-logo img {
+  filter: drop-shadow(0 0 14px color-mix(in srgb, var(--sl-bone) 50%, transparent)) brightness(0.9) saturate(0.45);
+}
+
+/* ----- SIGNAL — heavy CRT: chromatic split, RGB ghosts, hard scanlines ----- */
+#var-terminal .is-sealight.sl-mode-signal .term-chapter-inner {
+  background: #02060f;
+  position: relative;
+  isolation: isolate;
+}
+#var-terminal .is-sealight.sl-mode-signal .term-chapter-inner::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    repeating-linear-gradient(0deg,
+      transparent 0 2px,
+      rgba(120,200,230,0.08) 2px 3px),
+    radial-gradient(ellipse 100% 60% at 50% 50%, transparent 40%, rgba(0,0,0,0.7) 100%);
+}
+#var-terminal .is-sealight.sl-mode-signal .term-chapter-inner::after {
+  display: none;
+}
+#var-terminal .is-sealight.sl-mode-signal .term-opener,
+#var-terminal .is-sealight.sl-mode-signal .term-chapter,
+#var-terminal .is-sealight.sl-mode-signal .term-node {
+  background: transparent !important;
+  border-color: rgba(140,210,230,0.18) !important;
+  position: relative; z-index: 2;
+}
+#var-terminal .is-sealight.sl-mode-signal .term-opener-img {
+  filter: brightness(0.55) contrast(1.15) saturate(0.4) hue-rotate(180deg);
+}
+/* Chromatic-aberration style title — uses CSS text-shadow tricks */
+#var-terminal .is-sealight.sl-mode-signal .term-opener-zh,
+#var-terminal .is-sealight.sl-mode-signal .term-chapter-zh,
+#var-terminal .is-sealight.sl-mode-signal .term-opener-num,
+#var-terminal .is-sealight.sl-mode-signal .term-chapter-num,
+#var-terminal .is-sealight.sl-mode-signal .term-node-zh {
+  color: #e8f4fa;
+  text-shadow:
+    -2px 0 0 rgba(255,80,130,0.55),
+     2px 0 0 rgba(80,200,255,0.55),
+     0 0 30px rgba(180,230,250,0.35);
+}
+@keyframes sl-signal-jitter-unused {
+  0%   { transform: translateX(0); }
+  50%  { transform: translateX(0.5px); }
+  100% { transform: translateX(0); }
+}
+#var-terminal .is-sealight.sl-mode-signal .term-opener-en,
+#var-terminal .is-sealight.sl-mode-signal .term-chapter-en,
+#var-terminal .is-sealight.sl-mode-signal .term-node-en,
+#var-terminal .is-sealight.sl-mode-signal .term-opener-meta,
+#var-terminal .is-sealight.sl-mode-signal .term-opener-tags {
+  color: #6fc8e0;
+}
+#var-terminal .is-sealight.sl-mode-signal .term-opener-tags span {
+  border-color: rgba(111,200,224,0.4);
+  background: rgba(111,200,224,0.04);
+}
+#var-terminal .is-sealight.sl-mode-signal .term-opener-summary,
+#var-terminal .is-sealight.sl-mode-signal .term-opener-detail,
+#var-terminal .is-sealight.sl-mode-signal .term-node p,
+#var-terminal .is-sealight.sl-mode-signal .term-node-summary,
+#var-terminal .is-sealight.sl-mode-signal .term-node-detail {
+  color: rgba(232,244,250,0.9);
+}
+
+/* ----- GHOST — phosphor afterimage, soft blur, slow fade ----- */
+#var-terminal .is-sealight.sl-mode-ghost .term-chapter-inner {
+  background: radial-gradient(ellipse 100% 80% at 50% 50%, #0a1828 0%, #02060d 100%);
+  position: relative;
+  isolation: isolate;
+}
+#var-terminal .is-sealight.sl-mode-ghost .term-chapter-inner::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    repeating-linear-gradient(0deg,
+      transparent 0 3px,
+      rgba(180,230,250,0.04) 3px 4px);
+}
+/* 电子潮汐 — slow vertical tide pulses (vertical bands shifting horizontally) */
+#var-terminal .is-sealight.sl-mode-ghost .term-chapter-inner > .sl-tide {
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  overflow: hidden;
+  mix-blend-mode: screen;
+  opacity: 0.9;
+}
+#var-terminal .is-sealight.sl-mode-ghost .sl-tide::before,
+#var-terminal .is-sealight.sl-mode-ghost .sl-tide::after {
+  content: '';
+  position: absolute; top: -10%; bottom: -10%;
+  width: 240px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(140,210,235,0.06) 25%,
+    rgba(180,230,250,0.16) 50%,
+    rgba(140,210,235,0.06) 75%,
+    transparent 100%);
+  filter: blur(18px);
+}
+#var-terminal .is-sealight.sl-mode-ghost .sl-tide::before {
+  left: 30%;
+  animation: sl-tide-a 16s ease-in-out infinite alternate;
+}
+#var-terminal .is-sealight.sl-mode-ghost .sl-tide::after {
+  left: 65%;
+  width: 320px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(120,200,225,0.05) 30%,
+    rgba(160,220,240,0.12) 50%,
+    rgba(120,200,225,0.05) 70%,
+    transparent 100%);
+  animation: sl-tide-b 22s ease-in-out infinite alternate;
+}
+@keyframes sl-tide-a {
+  0%   { transform: translateX(-40px) scaleX(1);   opacity: 0.55; }
+  50%  { transform: translateX(20px)  scaleX(1.4); opacity: 0.95; }
+  100% { transform: translateX(60px)  scaleX(1);   opacity: 0.55; }
+}
+@keyframes sl-tide-b {
+  0%   { transform: translateX(40px)  scaleX(1.1); opacity: 0.45; }
+  50%  { transform: translateX(-30px) scaleX(0.85);opacity: 0.8;  }
+  100% { transform: translateX(-70px) scaleX(1.2); opacity: 0.5;  }
+}
+/* 数据潮汐 — faint scrolling mono ticks at far edges, like a tide-gauge readout */
+#var-terminal .is-sealight.sl-mode-ghost .sl-tide-gauge {
+  position: absolute; left: 22px; top: 50%; transform: translateY(-50%);
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.3em;
+  color: rgba(180,230,250,0.4); text-transform: uppercase;
+  writing-mode: vertical-rl; text-orientation: mixed;
+  line-height: 2.4;
+  pointer-events: none; z-index: 2;
+  white-space: nowrap;
+  animation: sl-tide-gauge 18s linear infinite;
+}
+@keyframes sl-tide-gauge {
+  0%   { opacity: 0.25; }
+  50%  { opacity: 0.55; }
+  100% { opacity: 0.25; }
+}
+#var-terminal .is-sealight.sl-mode-ghost .term-opener,
+#var-terminal .is-sealight.sl-mode-ghost .term-chapter,
+#var-terminal .is-sealight.sl-mode-ghost .term-node {
+  background: transparent !important;
+  border-color: rgba(180,230,250,0.12) !important;
+  position: relative; z-index: 2;
+}
+#var-terminal .is-sealight.sl-mode-ghost .term-opener-img {
+  filter: brightness(0.5) contrast(1.1) saturate(0.3) hue-rotate(180deg) blur(0.5px);
+  opacity: 0.85;
+}
+/* Phosphor afterimage — multiple soft offset shadows */
+#var-terminal .is-sealight.sl-mode-ghost .term-opener-zh,
+#var-terminal .is-sealight.sl-mode-ghost .term-chapter-zh,
+#var-terminal .is-sealight.sl-mode-ghost .term-opener-num,
+#var-terminal .is-sealight.sl-mode-ghost .term-chapter-num,
+#var-terminal .is-sealight.sl-mode-ghost .term-node-zh {
+  color: #d8eef6;
+  text-shadow:
+    0 0 4px  rgba(216,238,246,0.85),
+    0 0 18px rgba(180,230,250,0.55),
+    0 0 50px rgba(140,210,230,0.4),
+    0 0 100px rgba(100,180,210,0.25);
+  animation: sl-ghost-fade 10s ease-in-out infinite alternate;
+}
+@keyframes sl-ghost-fade {
+  0%   { opacity: 0.82; filter: blur(0.3px); }
+  100% { opacity: 1;    filter: blur(0px);   }
+}
+#var-terminal .is-sealight.sl-mode-ghost .term-opener-en,
+#var-terminal .is-sealight.sl-mode-ghost .term-chapter-en,
+#var-terminal .is-sealight.sl-mode-ghost .term-node-en,
+#var-terminal .is-sealight.sl-mode-ghost .term-opener-meta {
+  color: rgba(180,230,250,0.7);
+}
+#var-terminal .is-sealight.sl-mode-ghost .term-opener-tags span {
+  border-color: rgba(180,230,250,0.25);
+  color: rgba(216,238,246,0.75);
+  background: rgba(180,230,250,0.03);
+}
+#var-terminal .is-sealight.sl-mode-ghost .term-opener-summary,
+#var-terminal .is-sealight.sl-mode-ghost .term-opener-detail,
+#var-terminal .is-sealight.sl-mode-ghost .term-node p,
+#var-terminal .is-sealight.sl-mode-ghost .term-node-summary,
+#var-terminal .is-sealight.sl-mode-ghost .term-node-detail {
+  color: rgba(232,246,250,0.88);
+  text-shadow: 0 0 12px rgba(180,230,250,0.2);
+}
+
+/* ----- GHOST+SIGNAL — combined: dim phosphor base + chromatic split + jitter ----- */
+#var-terminal .is-sealight.sl-mode-ghostsignal .term-chapter-inner {
+  background: radial-gradient(ellipse 100% 80% at 50% 50%, #0a1828 0%, #02060d 100%);
+  position: relative;
+  isolation: isolate;
+}
+#var-terminal .is-sealight.sl-mode-ghostsignal .term-chapter-inner::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    repeating-linear-gradient(0deg,
+      transparent 0 3px,
+      rgba(180,230,250,0.05) 3px 4px),
+    radial-gradient(ellipse 100% 60% at 50% 50%, transparent 40%, rgba(0,0,0,0.6) 100%);
+}
+#var-terminal .is-sealight.sl-mode-ghostsignal .term-chapter-inner::after {
+  display: none;
+}
+#var-terminal .is-sealight.sl-mode-ghostsignal .term-opener,
+#var-terminal .is-sealight.sl-mode-ghostsignal .term-chapter,
+#var-terminal .is-sealight.sl-mode-ghostsignal .term-node {
+  background: transparent !important;
+  border-color: rgba(180,230,250,0.14) !important;
+  position: relative; z-index: 2;
+}
+#var-terminal .is-sealight.sl-mode-ghostsignal .term-opener-img {
+  filter: brightness(0.45) contrast(1.18) saturate(0.35) hue-rotate(180deg) blur(0.4px);
+  opacity: 0.82;
+}
+#var-terminal .is-sealight.sl-mode-ghostsignal .term-opener-zh,
+#var-terminal .is-sealight.sl-mode-ghostsignal .term-chapter-zh,
+#var-terminal .is-sealight.sl-mode-ghostsignal .term-opener-num,
+#var-terminal .is-sealight.sl-mode-ghostsignal .term-chapter-num,
+#var-terminal .is-sealight.sl-mode-ghostsignal .term-node-zh {
+  color: #d8eef6;
+  text-shadow:
+    -2px 0 0 rgba(255,80,130,0.5),
+     2px 0 0 rgba(80,200,255,0.5),
+     0 0 6px  rgba(216,238,246,0.7),
+     0 0 22px rgba(180,230,250,0.5),
+     0 0 60px rgba(140,210,230,0.35);
+  animation: sl-ghost-fade 10s ease-in-out infinite alternate;
+}
+#var-terminal .is-sealight.sl-mode-ghostsignal .term-opener-en,
+#var-terminal .is-sealight.sl-mode-ghostsignal .term-chapter-en,
+#var-terminal .is-sealight.sl-mode-ghostsignal .term-node-en,
+#var-terminal .is-sealight.sl-mode-ghostsignal .term-opener-meta {
+  color: rgba(180,230,250,0.7);
+}
+#var-terminal .is-sealight.sl-mode-ghostsignal .term-opener-tags span {
+  border-color: rgba(180,230,250,0.28);
+  color: rgba(216,238,246,0.78);
+  background: rgba(180,230,250,0.04);
+}
+#var-terminal .is-sealight.sl-mode-ghostsignal .term-opener-summary,
+#var-terminal .is-sealight.sl-mode-ghostsignal .term-opener-detail,
+#var-terminal .is-sealight.sl-mode-ghostsignal .term-node p,
+#var-terminal .is-sealight.sl-mode-ghostsignal .term-node-summary,
+#var-terminal .is-sealight.sl-mode-ghostsignal .term-node-detail {
+  color: rgba(232,246,250,0.88);
+  text-shadow: 0 0 12px rgba(180,230,250,0.18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #var-terminal .is-sealight .term-chapter-inner::before,
+  #var-terminal .is-sealight .term-chapter-inner::after,
+  #var-terminal .is-sealight [class*='term-'] {
+    animation: none !important;
+  }
+}
+
+/* TERMINAL chapter (no media) */
+#var-terminal .term-chapter {
+  display: grid; grid-template-columns: 80px 1fr 80px; min-height: 50vh;
+  border-bottom: 1px solid var(--term-rule);
+  background: linear-gradient(180deg, var(--term-bg-2) 0%, var(--term-bg) 100%);
+}
+#var-terminal .term-chapter-tick {
+  border-right: 1px solid var(--term-rule); position: relative;
+  background-image: repeating-linear-gradient(180deg, transparent 0 39px, var(--term-rule) 39px 40px);
+}
+#var-terminal .term-chapter-tick:last-child { border-right: 0; border-left: 1px solid var(--term-rule); }
+#var-terminal .term-chapter-mid { padding: 60px 48px; display: grid; grid-template-rows: auto 1fr auto; }
+#var-terminal .term-chapter-meta {
+  display: flex; justify-content: space-between; font-size: 11px; letter-spacing: 0.22em;
+  color: var(--term-accent); text-transform: uppercase;
+  border-bottom: 1px solid var(--term-rule); padding-bottom: 14px;
+}
+#var-terminal .term-chapter-num {
+  font-family: var(--sans); font-size: clamp(180px, 24vw, 360px); font-weight: 900;
+  line-height: 0.85; letter-spacing: -0.06em; color: var(--term-fg); align-self: center; margin: 32px 0;
+}
+#var-terminal .term-chapter-numrow {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  margin: 32px 0;
+}
+#var-terminal .term-chapter-numrow .term-chapter-num { margin: 0; }
+#var-terminal .term-chapter-emblem {
+  width: clamp(70px, 7vw, 110px); height: auto;
+  filter: drop-shadow(0 0 12px color-mix(in srgb, var(--term-accent) 25%, transparent));
+  opacity: 0.85;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+#var-terminal .term-chapter-titles { display: flex; align-items: baseline; justify-content: space-between; border-top: 1px solid var(--term-rule); padding-top: 14px; }
+#var-terminal .term-chapter-zh { font-family: var(--sans); font-size: clamp(40px, 5vw, 64px); font-weight: 700; letter-spacing: 0.04em; color: var(--term-fg); }
+#var-terminal .term-chapter-en { font-size: 12px; letter-spacing: 0.3em; color: var(--term-accent); }
+
+/* TERMINAL node */
+#var-terminal .term-node {
+  display: grid; grid-template-columns: 80px 1fr 80px;
+  border-bottom: 1px solid var(--term-rule-soft);
+}
+#var-terminal .term-node-num {
+  border-right: 1px solid var(--term-rule); padding: 32px 0;
+  font-size: 12px; letter-spacing: 0.18em; color: var(--term-accent); text-transform: uppercase; text-align: center;
+  background-image: repeating-linear-gradient(180deg, transparent 0 39px, var(--term-rule-soft) 39px 40px);
+}
+#var-terminal .term-node-num span {
+  display: block; font-family: var(--sans); font-size: 52px; font-weight: 900;
+  color: var(--term-fg); line-height: 1; margin-top: 8px; letter-spacing: -0.02em;
+}
+#var-terminal .term-node-rule { border-left: 1px solid var(--term-rule); }
+#var-terminal .term-node-body { padding: 32px 48px 48px; }
+#var-terminal .term-node-head {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px;
+  font-size: 11px; letter-spacing: 0.18em; color: var(--term-fg-dim); text-transform: uppercase;
+  border-bottom: 1px solid var(--term-rule); padding-bottom: 14px; margin-bottom: 24px;
+}
+#var-terminal .term-node-head strong {
+  display: block; color: var(--term-fg); font-weight: 500; font-size: 12px;
+  text-transform: none; letter-spacing: 0.08em; margin-top: 4px;
+}
+#var-terminal .term-node-zh {
+  font-family: var(--sans); font-size: clamp(40px, 5vw, 64px); font-weight: 800;
+  letter-spacing: 0.02em; color: var(--term-fg); margin: 0;
+}
+#var-terminal .term-node-en { font-size: 14px; letter-spacing: 0.3em; color: var(--term-accent); text-transform: uppercase; }
+#var-terminal .term-node-loc { font-size: 12px; letter-spacing: 0.16em; color: var(--term-fg-dim); margin-bottom: 24px; text-transform: uppercase; }
+#var-terminal .term-node-summary {
+  font-family: var(--serif); font-size: 24px; line-height: 1.55; color: var(--term-fg);
+  max-width: 720px; margin: 0 0 24px; text-wrap: pretty;
+}
+#var-terminal .term-node-detail { font-size: 14px; line-height: 1.85; color: var(--term-fg-mid); max-width: 720px; text-wrap: pretty; }
+#var-terminal .term-quote {
+  margin: 28px 0; padding: 18px 24px; border: 1px dashed color-mix(in srgb, var(--term-accent) 40%, transparent);
+  font-family: var(--serif); font-style: italic; font-size: 19px; line-height: 1.55;
+  font-family: var(--serif); font-style: italic; font-size: 18px; line-height: 1.55;
+  color: var(--term-accent); max-width: 720px;
+}
+#var-terminal .term-quote .qa {
+  display: block; margin-top: 10px; font-family: var(--mono); font-style: normal;
+  font-size: 10px; letter-spacing: 0.2em; color: var(--term-fg-dim); text-transform: uppercase;
+}
+#var-terminal .term-tags span { padding: 4px 10px; border: 1px solid color-mix(in srgb, var(--term-accent) 30%, transparent); margin: 0 6px 6px 0; color: var(--term-accent); }
+#var-terminal .term-portrait img { filter: grayscale(0.4) contrast(1.05); }
+/* Spider & Blade — slightly aged & dimmed */
+.term-portrait img[src*="spider-and-blade"],
+.cin-portrait img[src*="spider-and-blade"],
+.ed-portrait img[src*="spider-and-blade"] {
+  filter: grayscale(0.55) contrast(0.92) brightness(0.78) sepia(0.18) !important;
+}
+
+/* Goodnight (Natalie's farewell) — tall four-panel strip, render as comic column.
+   Image is ~1:2.08; render full color (no grayscale), narrow column, centered. */
+.term-portrait:has(img[src*="natalie-goodnight"]),
+.cin-portrait:has(img[src*="natalie-goodnight"]),
+.ed-portrait:has(img[src*="natalie-goodnight"]) {
+  max-width: 200px !important;
+  width: 200px !important;
+  float: right !important;
+  /* Big negative margin-top pulls the float up to align with the node title/summary
+     instead of sitting at the bottom-right of the detail block. */
+  margin: -380px 0 18px 28px !important;
+  display: block !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  grid-template-columns: 1fr !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+.term-portrait img[src*="natalie-goodnight"],
+.cin-portrait img[src*="natalie-goodnight"],
+.ed-portrait img[src*="natalie-goodnight"] {
+  width: 100% !important;
+  max-width: 220px !important;
+  height: auto !important;
+  display: block !important;
+  margin: 0 !important;
+  filter: contrast(1.02) !important;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.term-portrait:has(img[src*="natalie-goodnight"]) .term-portrait-meta,
+.cin-portrait:has(img[src*="natalie-goodnight"]) .cin-portrait-meta,
+.ed-portrait:has(img[src*="natalie-goodnight"]) .ed-portrait-meta {
+  max-width: 220px !important;
+  margin: 8px 0 0 !important;
+}
+#var-terminal .term-sb-frame { border: 1px solid color-mix(in srgb, var(--term-fg) 20%, transparent); padding: 6px; background: color-mix(in srgb, var(--term-fg) 4%, transparent); }
+#var-terminal .term-sb-frame img { filter: grayscale(0.4) contrast(1.05); }
+#var-terminal .term-sb-frame-meta span { color: var(--term-accent); }
+#var-terminal .term-sb-frame-meta span:last-child { color: var(--term-fg-dim); }
+#var-terminal .term-sb-label { color: var(--term-accent); border-bottom: 1px solid var(--term-rule); }
+#var-terminal .term-node-title { display: flex; align-items: baseline; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
+#var-terminal .term-node-detail p { margin: 0 0 16px; }
+/* Crown chapter (VII) opener: parable styling — italic serif, slight indent */
+#var-terminal .term-chapter-block[data-chapter="VII. THE CROWN OF AURSICHT IS YOURS"] .term-node-summary {
+  font-style: italic; color: var(--term-fg-mid);
+  max-width: 720px; font-size: 16px; line-height: 1.7;
+  letter-spacing: 0.01em;
+}
+#var-terminal .term-chapter-block[data-chapter="VII. THE CROWN OF AURSICHT IS YOURS"] .term-node-detail {
+  font-family: var(--serif); font-size: 17px; line-height: 1.85;
+  color: var(--term-fg); max-width: 720px;
+}
+#var-terminal .term-chapter-block[data-chapter="VII. THE CROWN OF AURSICHT IS YOURS"] .term-node-detail p {
+  margin: 0 0 22px;
+  text-indent: 0;
+}
+#var-terminal .term-tags { display: flex; flex-wrap: wrap; gap: 0; margin-top: 24px; clear: both; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--term-accent); }
+
+/* TERMINAL portrait — base */
+#var-terminal .term-portrait { margin: 0; position: relative; }
+#var-terminal .term-portrait img {
+  width: 100%;
+  filter: grayscale(0.4) contrast(1.05) hue-rotate(-10deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  #var-terminal .term-opener-img,
+  #var-terminal .term-opener-img > .term-crt-overlay {
+    animation: none !important;
+  }
+}
+#var-terminal .term-portrait-meta {
+  display: grid; grid-template-columns: 1fr 1fr; margin-top: 10px; gap: 16px;
+  font-size: 10px; letter-spacing: 0.2em; color: var(--term-accent); text-transform: uppercase;
+}
+#var-terminal .term-portrait-meta span:last-child { text-align: right; color: var(--term-fg-dim); }
+
+/* TERMINAL storyboard */
+#var-terminal .term-storyboard-base { margin: 28px 0; }
+#var-terminal .term-sb-label {
+  font-size: 11px; letter-spacing: 0.22em; color: var(--term-accent); text-transform: uppercase;
+  margin-bottom: 12px; border-bottom: 1px solid var(--term-rule); padding-bottom: 8px;
+}
+#var-terminal .term-storyboard { margin: 28px 0; }
+
+/* === TERMINAL MEDIA LAYOUT I === */
+body[data-media="I"] #var-terminal .term-portrait,
+body[data-media="I"] #var-terminal .term-storyboard {
+  clear: both; float: none; width: auto; max-width: none;
+  margin: 56px -48px; padding: 56px 48px;
+  border-top: 1px solid var(--term-rule); border-bottom: 1px solid var(--term-rule);
+  background: var(--term-bg-3);
+}
+body[data-media="I"] #var-terminal .term-portrait img {
+  max-width: 640px; margin: 0 auto; filter: grayscale(0.3) contrast(1.05) brightness(1.05) hue-rotate(-10deg);
+}
+body[data-media="I"] #var-terminal .term-portrait-meta {
+  max-width: 640px; margin: 14px auto 0;
+  border-top: 1px solid var(--term-rule); padding-top: 10px;
+}
+
+/* === TERMINAL MEDIA LAYOUT J === */
+body[data-media="J"] #var-terminal .term-portrait {
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: start;
+  margin: 40px -64px 40px -64px; padding: 0; border: 0; background: transparent;
+}
+body[data-media="J"] #var-terminal .term-portrait img { filter: grayscale(0.3) contrast(1.06) brightness(1.05) hue-rotate(-10deg); }
+body[data-media="J"] #var-terminal .term-portrait-meta {
+  display: block; margin-top: 0; align-self: end;
+  border-top: 1px solid rgba(216,168,104,0.5); padding-top: 12px; line-height: 2;
+}
+body[data-media="J"] #var-terminal .term-portrait-meta span { display: block; text-align: left; }
+body[data-media="J"] #var-terminal .term-portrait-meta span:last-child { color: var(--term-fg); font-size: 13px; margin-top: 4px; }
+body[data-media="J"] #var-terminal .term-storyboard {
+  margin: 40px -64px 40px 0;
+}
+
+/* === TERMINAL MEDIA LAYOUT L === */
+body[data-media="L"] #var-terminal .term-portrait {
+  position: relative; width: 360px; max-width: 100%;
+  margin: 32px 0 40px -32px; padding: 0; border: 0; background: transparent;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 28px), calc(100% - 48px) 100%, 0 100%);
+}
+body[data-media="L"] #var-terminal .term-portrait::before {
+  content: ''; position: absolute; top: -12px; left: -12px; right: 28px; bottom: 28px;
+  border: 1px solid rgba(216,168,104,0.6); pointer-events: none; z-index: 0;
+}
+body[data-media="L"] #var-terminal .term-portrait img {
+  position: relative; z-index: 1; filter: grayscale(0.3) contrast(1.06) brightness(1.04) hue-rotate(-10deg);
+}
+body[data-media="L"] #var-terminal .term-portrait-meta {
+  position: relative; z-index: 1; margin-top: 0; padding: 8px 12px;
+  background: var(--term-accent); color: var(--term-bg); border: 0;
+  display: flex; justify-content: space-between;
+}
+body[data-media="L"] #var-terminal .term-portrait-meta span,
+body[data-media="L"] #var-terminal .term-portrait-meta span:last-child { color: #0a0c0a; }
+body[data-media="L"] #var-terminal .term-storyboard {
+  width: 460px; margin: 32px -32px 40px auto;
+}
+#var-terminal .term-sb-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+#var-terminal .term-sb-frame { border: 1px solid var(--term-rule); padding: 6px; background: color-mix(in srgb, var(--term-fg) 4%, transparent); }
+#var-terminal .term-sb-frame img { aspect-ratio: 4/3; width: 100%; object-fit: cover; filter: grayscale(0.4) contrast(1.05); }
+#var-terminal .term-sb-frame-meta {
+  display: flex; justify-content: space-between; margin-top: 6px;
+  font-size: 9px; letter-spacing: 0.18em; color: var(--term-accent); text-transform: uppercase;
+}
+#var-terminal .term-sb-frame-meta span:last-child { color: var(--term-fg-dim); }
+
+/* ============================================================
+   WIKI LINKS — auto-injected anchors inside body text
+   ============================================================ */
+.wiki-link {
+  color: color-mix(in srgb, currentColor 70%, #d8a868 30%);
+  text-decoration: underline;
+  text-decoration-color: rgba(216,168,104,0.35);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.15s, text-decoration-color 0.15s;
+}
+.wiki-link:hover {
+  color: #e8c490;
+  text-decoration-color: rgba(232,196,144,0.8);
+}
+
+/* ============================================================
+   D · WIKI — sub-page (simplified terminal)
+   ============================================================ */
+#var-wiki {
+  background: var(--wiki-bg, #0a100a);
+  color: var(--wiki-fg, #c8e0c0);
+  font-family: var(--mono);
+  --wiki-bg: #0a100a;
+  --wiki-bg-2: #0c140c;
+  --wiki-fg: #c8e0c0;
+  --wiki-fg-mid: #8aa088;
+  --wiki-fg-dim: #5a7058;
+  --wiki-accent: #d8a868;
+  --wiki-rule: rgba(200,224,192,0.18);
+  min-height: 100vh;
+}
+#var-wiki .wiki-topbar {
+  position: sticky; top: 87px; z-index: 40;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 32px; border-bottom: 1px solid var(--wiki-rule);
+  background: var(--wiki-bg-2); backdrop-filter: blur(6px);
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--wiki-fg-dim);
+}
+#var-wiki .wiki-back {
+  color: var(--wiki-accent); text-decoration: none;
+  letter-spacing: 0.22em;
+  border-bottom: 1px solid rgba(216,168,104,0.4);
+  padding-bottom: 2px;
+}
+#var-wiki .wiki-back:hover { border-bottom-color: var(--wiki-accent); }
+#var-wiki .wiki-crumb { color: var(--wiki-fg-dim); }
+#var-wiki .wiki-crumb strong { color: var(--wiki-fg); font-weight: 500; }
+
+#var-wiki .wiki-page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 80px 48px 160px;
+}
+#var-wiki .wiki-kind {
+  font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--wiki-accent);
+  margin-bottom: 24px;
+  padding-bottom: 14px; border-bottom: 1px solid var(--wiki-rule);
+  display: flex; justify-content: space-between;
+}
+#var-wiki .wiki-kind .wk-slug { color: var(--wiki-fg-dim); }
+#var-wiki .wiki-zh {
+  font-family: var(--serif);
+  font-size: clamp(56px, 8vw, 96px); font-weight: 500;
+  line-height: 1.0; letter-spacing: -0.01em; color: var(--wiki-fg);
+  margin: 0 0 14px;
+  text-shadow: 0 0 24px color-mix(in srgb, var(--wiki-accent) 20%, transparent);
+}
+#var-wiki .wiki-en {
+  font-family: var(--mono); font-size: 13px; letter-spacing: 0.32em;
+  color: var(--wiki-accent); text-transform: uppercase;
+  margin-bottom: 48px;
+}
+
+#var-wiki .wiki-summary {
+  font-family: var(--serif); font-size: 21px; line-height: 1.7;
+  color: var(--wiki-fg); text-wrap: pretty;
+  margin: 0 0 56px;
+}
+#var-wiki .wiki-summary p { margin: 0 0 18px; }
+#var-wiki .wiki-summary p:last-child { margin-bottom: 0; }
+
+/* === Character / mission profile layout — left profile + floating banner === */
+#var-wiki .wiki-page.is-profile {
+  max-width: 1180px; padding: 0 0 160px;
+}
+#var-wiki .wiki-faction-logo {
+  display: flex; align-items: center; justify-content: center;
+  margin: 8px 0 32px;
+  padding: 36px 24px;
+  border: 1px solid var(--wiki-rule);
+  background: color-mix(in srgb, var(--wiki-bg-2) 60%, transparent);
+}
+#var-wiki .wiki-faction-logo img {
+  max-width: 240px; max-height: 200px;
+  width: auto; height: auto;
+  filter: drop-shadow(0 0 24px color-mix(in srgb, var(--wiki-accent) 25%, transparent));
+  opacity: 0.92;
+}
+#var-wiki .profile-banner {
+  position: sticky; top: 46px; z-index: 35;
+  background: linear-gradient(180deg, var(--wiki-bg-2) 0%, color-mix(in srgb, var(--wiki-bg-2) 90%, transparent) 100%);
+  border-bottom: 1px solid var(--wiki-rule);
+  padding: 14px 48px;
+  display: flex; align-items: center; gap: 24px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--wiki-fg-dim);
+  backdrop-filter: blur(10px);
+}
+#var-wiki .profile-banner .pb-mark {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--wiki-accent);
+}
+#var-wiki .profile-banner .pb-mark::before {
+  content: ''; width: 8px; height: 8px;
+  background: var(--wiki-accent);
+  display: inline-block;
+}
+#var-wiki .profile-banner .pb-zh {
+  font-family: var(--serif); font-size: 18px; font-style: italic;
+  letter-spacing: 0.04em; color: var(--wiki-fg); text-transform: none;
+}
+#var-wiki .profile-banner .pb-spacer { flex: 1; }
+#var-wiki .profile-banner .pb-tag {
+  padding: 4px 10px; border: 1px solid var(--wiki-rule);
+  color: var(--wiki-fg-mid);
+}
+
+#var-wiki .profile-shell {
+  display: grid; grid-template-columns: 320px 1fr;
+  gap: 56px;
+  padding: 64px 48px 0;
+  align-items: start;
+}
+#var-wiki .profile-side {
+  position: sticky; top: 110px;
+  display: flex; flex-direction: column; gap: 24px;
+}
+#var-wiki .profile-portrait {
+  width: 100%; aspect-ratio: 3/4;
+  background: var(--wiki-bg-2);
+  border: 1px solid var(--wiki-rule);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.32em;
+  color: var(--wiki-fg-dim); text-transform: uppercase;
+  position: relative;
+}
+#var-wiki .profile-portrait::before {
+  content: 'NO IMAGE / 未提供'; opacity: 0.4;
+}
+#var-wiki .profile-portrait::after {
+  content: ''; position: absolute; inset: 6px;
+  border: 1px dashed rgba(216,168,104,0.2);
+  pointer-events: none;
+}
+#var-wiki .profile-portrait[data-glyph]::before {
+  content: attr(data-glyph);
+  font-family: var(--serif); font-size: 96px; font-weight: 500;
+  font-style: italic; letter-spacing: 0;
+  color: var(--wiki-accent); opacity: 0.7;
+  text-shadow: 0 0 32px color-mix(in srgb, var(--wiki-accent) 30%, transparent);
+}
+#var-wiki .profile-stats {
+  border-top: 1px solid var(--wiki-rule);
+  border-bottom: 1px solid var(--wiki-rule);
+  padding: 14px 0;
+  font-size: 11px; line-height: 1.9;
+  font-family: var(--mono); letter-spacing: 0.04em;
+}
+#var-wiki .profile-stats .ps-row {
+  display: grid; grid-template-columns: 90px 1fr; gap: 12px;
+}
+#var-wiki .profile-stats .ps-key {
+  color: var(--wiki-fg-dim); letter-spacing: 0.18em; text-transform: uppercase; font-size: 10px;
+}
+#var-wiki .profile-stats .ps-val { color: var(--wiki-fg); }
+#var-wiki .profile-stats .ps-val em { color: var(--wiki-accent); font-style: normal; }
+#var-wiki .profile-quote {
+  font-family: var(--serif); font-style: italic;
+  font-size: 15px; line-height: 1.65;
+  color: var(--wiki-fg-mid);
+  border-left: 2px solid var(--wiki-accent);
+  padding: 4px 0 4px 14px;
+}
+
+#var-wiki .profile-main { min-width: 0; }
+#var-wiki .profile-main .wiki-kind { margin-bottom: 18px; }
+#var-wiki .profile-main .wiki-zh {
+  font-size: clamp(48px, 6vw, 76px);
+  margin-bottom: 10px;
+}
+#var-wiki .profile-main .wiki-en { margin-bottom: 36px; }
+#var-wiki .profile-main .wiki-summary { font-size: 19px; margin-bottom: 40px; }
+
+@media (max-width: 900px) {
+  #var-wiki .profile-shell { grid-template-columns: 1fr; padding: 40px 24px 0; gap: 28px; }
+  #var-wiki .profile-side { position: static; }
+  #var-wiki .profile-portrait { max-width: 240px; }
+}
+
+/* meta block — small infobox below summary, terminal style */
+#var-wiki .wiki-meta {
+  display: grid; grid-template-columns: 140px 1fr;
+  gap: 0;
+  border-top: 1px solid var(--wiki-rule);
+  border-bottom: 1px solid var(--wiki-rule);
+  font-size: 12px; line-height: 1.8;
+  margin-bottom: 56px;
+}
+#var-wiki .wiki-meta .wm-key {
+  color: var(--wiki-accent); letter-spacing: 0.22em; text-transform: uppercase;
+  padding: 12px 16px 12px 0;
+  border-right: 1px solid var(--wiki-rule);
+}
+#var-wiki .wiki-meta .wm-val {
+  color: var(--wiki-fg); padding: 12px 16px; letter-spacing: 0.04em;
+}
+#var-wiki .wiki-meta .wm-row { display: contents; }
+#var-wiki .wiki-meta .wm-row + .wm-row .wm-key,
+#var-wiki .wiki-meta .wm-row + .wm-row .wm-val {
+  border-top: 1px solid var(--wiki-rule);
+}
+
+/* related — reverse-link list of timeline nodes mentioning this term */
+#var-wiki .wiki-related-label {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.32em;
+  color: var(--wiki-accent); text-transform: uppercase;
+  padding-bottom: 14px; border-bottom: 1px solid var(--wiki-rule);
+  margin-bottom: 4px;
+}
+#var-wiki .wiki-related-list { list-style: none; padding: 0; margin: 0; }
+#var-wiki .wiki-related-list li {
+  display: grid; grid-template-columns: 80px 1fr auto;
+  gap: 18px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--wiki-rule);
+  font-size: 13px; align-items: baseline;
+}
+#var-wiki .wiki-related-list a {
+  color: var(--wiki-fg);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+#var-wiki .wiki-related-list a:hover {
+  color: var(--wiki-accent);
+  border-bottom-color: rgba(216,168,104,0.5);
+}
+#var-wiki .wiki-related-list .wr-code {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em;
+  color: var(--wiki-fg-dim); text-transform: uppercase;
+}
+#var-wiki .wiki-related-list .wr-chap {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em;
+  color: var(--wiki-fg-dim); text-transform: uppercase;
+  text-align: right;
+}
+#var-wiki .wiki-empty {
+  color: var(--wiki-fg-dim); font-style: italic; padding: 14px 0;
+}
+#var-wiki .wiki-stub {
+  margin-top: 80px; padding: 24px; border: 1px dashed rgba(216,168,104,0.3);
+  font-size: 12px; color: var(--wiki-fg-dim); letter-spacing: 0.04em; line-height: 1.7;
+}
+#var-wiki .wiki-stub strong { color: var(--wiki-accent); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 400; }
+
+/* ============================================================
+   E · CATALOG — tree of all wiki entries
+   ============================================================ */
+#var-catalog {
+  background: #0a100a;
+  color: #c8e0c0;
+  font-family: 'Cormorant Garamond', 'Source Han Serif SC', serif;
+  --cat-fg: #d8d0c0;
+  --cat-fg-dim: #6a7268;
+  --cat-fg-mid: #8a9080;
+  --cat-accent: #d8a868;
+  --cat-rule: rgba(216,168,104,0.18);
+  --cat-bg-2: #14181a;
+  min-height: 100vh;
+  padding: 80px 48px 160px;
+}
+#var-catalog .cat-wrap { max-width: 1200px; margin: 0 auto; }
+#var-catalog .cat-topbar {
+  display: flex; justify-content: space-between; align-items: baseline;
+  border-bottom: 1px solid var(--cat-rule);
+  padding-bottom: 18px; margin-bottom: 56px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--cat-fg-dim);
+}
+#var-catalog .cat-back {
+  color: var(--cat-accent); text-decoration: none;
+  border-bottom: 1px solid transparent; padding-bottom: 2px;
+}
+#var-catalog .cat-back:hover { border-bottom-color: var(--cat-accent); }
+#var-catalog .cat-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(64px, 9vw, 112px); font-weight: 500;
+  line-height: 0.9; letter-spacing: -0.01em;
+  color: var(--cat-fg); margin: 0 0 8px;
+}
+#var-catalog .cat-subtitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--cat-accent); margin-bottom: 64px;
+}
+#var-catalog .cat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.18em;
+  color: var(--cat-fg-dim);
+  margin-bottom: 48px; text-transform: uppercase;
+}
+#var-catalog .cat-meta strong { color: var(--cat-fg); font-weight: 500; }
+
+#var-catalog .cat-section {
+  margin-bottom: 56px;
+  border-top: 1px solid var(--cat-rule);
+  padding-top: 28px;
+}
+#var-catalog .cat-section-head {
+  display: grid; grid-template-columns: 200px 1fr;
+  gap: 32px; margin-bottom: 24px;
+  align-items: baseline;
+}
+#var-catalog .cat-section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--cat-accent);
+}
+#var-catalog .cat-section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 500; color: var(--cat-fg);
+  margin: 0;
+}
+#var-catalog .cat-section-title .cs-en {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--cat-fg-dim); margin-left: 14px;
+}
+#var-catalog .cat-section-title .cs-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--cat-fg-dim); margin-left: 8px;
+}
+
+/* Tree */
+#var-catalog .cat-tree { padding-left: 200px; }
+@media (max-width: 900px) {
+  #var-catalog { padding: 56px 20px 120px; }
+  #var-catalog .cat-section-head { grid-template-columns: 1fr; gap: 8px; }
+  #var-catalog .cat-tree { padding-left: 0; }
+}
+
+#var-catalog .cat-group {
+  margin-bottom: 20px;
+}
+#var-catalog .cat-group-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--cat-fg-dim);
+  padding: 4px 0; margin-bottom: 6px;
+  display: flex; align-items: center; gap: 10px;
+}
+#var-catalog .cat-group-label::before {
+  content: '├'; color: var(--cat-accent); font-family: monospace;
+  font-size: 14px; opacity: 0.6;
+}
+#var-catalog .cat-group:last-child .cat-group-label::before { content: '└'; }
+
+#var-catalog .cat-row {
+  display: grid;
+  grid-template-columns: 32px 1fr 200px 80px;
+  gap: 16px;
+  padding: 10px 12px 10px 28px;
+  border-bottom: 1px solid rgba(216,168,104,0.06);
+  align-items: baseline;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  transition: background 0.15s, padding-left 0.15s;
+}
+#var-catalog .cat-row::before {
+  content: '─';
+  position: absolute; left: 8px; top: 12px;
+  color: var(--cat-fg-dim); font-family: monospace;
+  font-size: 12px; opacity: 0.4;
+}
+#var-catalog .cat-row:hover {
+  background: rgba(216,168,104,0.05);
+  padding-left: 36px;
+}
+#var-catalog .cat-row:hover .cr-zh { color: var(--cat-accent); }
+#var-catalog .cr-glyph {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 500;
+  color: var(--cat-accent); line-height: 1;
+  text-align: center;
+  opacity: 0.85;
+}
+#var-catalog .cr-glyph-empty { color: var(--cat-fg-dim); opacity: 0.4; }
+#var-catalog .cr-zh {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 500; color: var(--cat-fg);
+  letter-spacing: 0.02em;
+  transition: color 0.15s;
+}
+#var-catalog .cr-en {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.08em;
+  color: var(--cat-fg-dim);
+}
+#var-catalog .cr-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--cat-fg-mid);
+  text-align: right;
+}
+
+@media (max-width: 700px) {
+  #var-catalog .cat-row {
+    grid-template-columns: 28px 1fr;
+    grid-template-rows: auto auto;
+  }
+  #var-catalog .cr-en, #var-catalog .cr-tag { grid-column: 2; font-size: 10px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="exp-toolbar">
+  <div class="exp-title">YI YUAN · TYPOGRAPHY EXPLORATIONS · v2</div>
+  <div style="display:flex; gap:2px;" title="Terminal palette">
+    <button class="exp-tab exp-pal active" data-pal="olive">Olive</button>
+    <button class="exp-tab exp-pal" data-pal="cobalt">Cobalt</button>
+  </div>
+  <div style="margin-left:auto;"></div>
+</nav>
+
+<main class="exp-stage">
+  <section id="var-terminal"></section>
+  <section id="var-wiki"></section>
+  <section id="var-catalog" class="active"></section>
+</main>
+
+<script src="timeline-data.js"></script>
+<script>
+document.body.dataset.media = 'J';
+document.querySelectorAll('.exp-tab[data-tab]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.exp-tab[data-tab]').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.exp-stage > section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('var-' + btn.dataset.tab).classList.add('active');
+    window.scrollTo(0, 0);
+  });
+});
+document.body.dataset.termPal = 'olive';
+document.querySelectorAll('.exp-tab.exp-pal').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.exp-tab.exp-pal').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.body.dataset.termPal = btn.dataset.pal;
+  });
+});
+
+document.body.dataset.slMode = 'ghost';
+document.querySelectorAll('.exp-tab.exp-sl').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.exp-tab.exp-sl').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.body.dataset.slMode = btn.dataset.sl;
+    document.querySelectorAll('.term-chapter-block.is-sealight').forEach(el => {
+      el.classList.remove('sl-mode-ghost','sl-mode-signal','sl-mode-ghostsignal');
+      el.classList.add('sl-mode-' + btn.dataset.sl);
+    });
+  });
+});
+
+const NODES = window.TIMELINE_NODES || [];
+function isOpener(n) { return n.isWanderingOpener || n.isHotSeaOpener || n.isHiveOpener || n.isJudgmentOpener || n.isCrownOpener || n.isLightSeaOpener || n.isEpilogue; }
+function esc(s) { return (s || '').toString().replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c])); }
+
+// =========== WIKI PAGES ===========
+// Each entry: slug, zh title, en title, kind, aliases (alt names found in body text → all link to this page),
+// summary (1 short paragraph — placeholder where uncertain), meta rows (key/value), tags.
+const WIKI_PAGES = {
+  'yiyuan': {
+    zh: '易渊', en: 'Yi Yuan', kind: '人物',
+    profile: true, glyph: '易',
+    aliases: [],
+    quote: '我不是人类。也不是机器。',
+    fileRef: '11-OPS-Δ-0001',
+    clearance: 'ONYX',
+    stats: [
+      ['性别', '未明 · 以男性体现'],
+      ['年龄', '以 26 周年计'],
+      ['身高', '188cm'],
+      ['出身', '北陆 · 罗兹涅共和国'],
+      ['持有者', '是 · 不可逆'],
+      ['职务', '第11局 · 讯问部 · 顶级顾问']
+    ],
+    summary: '本档案主体。所有其他词条皆以本档为中心展开。详见主页。',
+    meta: [
+      ['阵营', '央联 · 第11局'],
+      ['职务', '讯问部顶级顾问 · 现场指揮'],
+      ['关键词', '隐身者 · 最后一颗铉 · 序列与人类之间']
+    ]
+  },
+  'lodis': {
+    zh: '洛狄斯·所罗门', en: 'Lodis Solomon', kind: '人物',
+    profile: true, glyph: '洛',
+    aliases: ['洛狄斯·所罗门', '洛狄斯', '蜘蛛'],
+    quote: '我绝不会剥夺你成为完整的人类后，用自己自由意志做出的选择。',
+    stats: [
+      ['性别', '男'], ['年龄', '33'], ['身高', '191cm'],
+      ['出身', '瓦伦图'], ['持有者', '否'],
+      ['职务', '11局管理协会会长 · 央联议员']
+    ],
+    summary: '所罗门家族当代年轻一辈的话事人，11局管理协会会长、实际掌权者。瓦伦图裔，金色卷发与祖母绿眼睛，气质温和，被政敌称为"蜘蛛"。十一岁从瓦伦图来到西联，雁临大学历史和国际关系双学位毕业。\n\n本质上是一个安全感不足的人，自小在勾心斗角的家族中靠斡旋为自己争取资源。堂姐娜塔莉是他人格底色与丰盈情感的来源——直至娜塔被家族压迫出逃、最终病重自尽于昂德斯沃尔山脉。在娜塔死后，洛同时收到她的遗书与遗体，并由此结识了亲手送她解脱的易渊。\n\n11局的概念在那段时期成形：所罗门家族注资、最先进的持有者与流金技术，是西联永远无法舍弃的一把刀，而这把刀将掌握在他手里。一年后易渊主动联系他加入11局，"易渊"这个名字也由洛起。两人此后发展出战友/共犯/家人/恋人的复杂关系。\n\n极强的占有欲、痛恨易渊的自毁倾向，但在易渊动身去阻止帝国计划时仍然放手——因为那是易渊作为完整人类做出的第一个自由选择。',
+    meta: [
+      ['阵营', '央联'],
+      ['职务', '所罗门家族 · 11局管理协会会长'],
+      ['关键词', '织网者 · 最后授权者 · 蜘蛛']
+    ]
+  },
+  'adam': {
+    zh: '亚当·索罗斯', en: 'Adam Soros', kind: '人物',
+    profile: true, glyph: '亚',
+    aliases: ['亚当·索罗斯', '亚当', '黄金之子'],
+    quote: '妈妈⋯我发誓，我会成为一个能自己做出选择的人类，而不是只知掠夺的野兽、只知杀戮的傀儡。',
+    stats: [
+      ['性别', '男'], ['年龄', '26'], ['身高', '187cm'],
+      ['出身', '维斯冈特帝国'], ['持有者', '是'],
+      ['装甲', '奥尔希特 / Aursicht'],
+      ['序列', '第3'],
+      ['军衔', '中校']
+    ],
+    summary: '维斯冈特帝国最年轻的中校，索罗斯家长子。原服役于第九军特殊机动旅，热海战争中担任第一突击战斗群执行官，战后主动调任蜂巢。装甲【奥尔希特】序列排名第三——维斯冈特神话中黄金瞳的盲眼女神，剜出双目掷入火焰熔炼为最致命的武器，司掌处决。\n\n出生于军事家族，父亲是帝国上将，母亲有南岛血统。十五岁母亲病逝前向他叮嘱：不要成为傀儡，战斗时也要思考战斗的意义。亚当对此发誓——尽管他并不完全明白母亲的意思——他会成为能自己做出选择的人类。\n\n十六岁就以异常天赋成为持有者，六年内从中尉晋升中校，序列从未有人达到的速度上升至第三位。但在热海战争中段，南岛人——母亲曾经的同胞——逐渐显出真实面目，沸血冷却下来。瓦拉尔行动里第一次面对反抗军首领"母亲"，又遇到没有装甲却势均力敌的易渊；连胜终于结束，他抱着困惑、愤怒、愧疚回到帝国，主动要求调任蜂巢。\n\n两年后他在蜂巢门口再次遇到那个追寻已久的敌人——重伤、跪在他面前请求传递情报机会的易渊。三十八天后，他亲手送对方去死，并第一次违抗了帝国。',
+    meta: [
+      ['阵营', '维斯冈特帝国'],
+      ['身份', '神序列第3 · 奥尔希特持有者'],
+      ['关键词', '黄金之子 · 奥尔希特 · 三十八天']
+    ]
+  },
+  'bureau11': {
+    zh: '第11局', en: 'Bureau Eleven · Maivico', kind: '组织',
+    aliases: ['第11局', '11局', '第十一局', '十一局', '麦维科'],
+    summary: '也称M局/麦维科 (Maivico - Mai"特设" VI"11" CO"行政局")。所罗门家族注资、提供巨量财政与技术支持，兼顾前沿研究、情报收集、跨境灰色区域作战渗透的匿名复合型特设机构。直属中央，向中央汇报。总部位于西大陆中部山区。\n\n下设掌权branch (局长 + 管理协会7席，其中所罗门家族占3席) 与执行branch (战术统筹部~50人、行动部~900人、医疗部~250人含植园、信息部~200人、后勤部~150人、监察部~50人直属中央)。行动部持有者比例85%，占央联全部持有者的20%。是中央为换取灵活性、杀伤力、匿名性、所罗门支持而牺牲部分支配权的功能性部门。',
+    meta: [
+      ['阵营', '央联'],
+      ['代号', 'M局 · Maivico'],
+      ['驻地', '西大陆中部山区']
+    ]
+  },
+  'hive': {
+    zh: '蜂巢', en: 'The Hive', kind: '组织',
+    aliases: ['蜂巢'],
+    summary: '帝国直属的特级军事科研复合机构，总部位于帝国东部断层地带的地下复合基地，仅直属于皇室与军部最高指挥机构。是帝国对铎进行系统性研究的中枢，包含科学研究、战术实验、持有者筛选与训练、装甲试制、神序列编制等多重功能。\n\n长期处于"未被官方承认"的状态，多名战争中失踪的科学家、前罗兹涅共和国研究者被证实曾在内部出现。会进行极端的人体试验，致力于开发能够对抗或摧毁央联特设部队的新型战斗体系。中央基地一般有序列前十驻守。光海计划即源自此处。',
+    meta: [
+      ['阵营', '维斯冈特帝国'],
+      ['关联', '光海计划 · 序列体系 · 虺']
+    ]
+  },
+  'action-dept': {
+    zh: '行动部', en: 'Operations Division', kind: '组织',
+    aliases: ['行动部', '11局行动部'],
+    summary: '11局执行branch下的精锐特种部队，约900人，持有者比例85%，占央联全部持有者的20%。共九个中队（每队约百人，第二中队约六十人为间谍/特工类，保密级别更高），下设若干小队与小组。第九中队为飞行中队。\n\n部长身份在中队及以上管理层知晓，日常以高级行动部成员身份活动；易渊在故事开始时即任此职，档案挂在第二中队。',
+    meta: [
+      ['阵营', '11局 · 央联'],
+      ['关联', '易渊 · 阿利安娜 · 叶卡尔德 · 简度']
+    ]
+  },
+  'plant-garden': {
+    zh: '植园', en: 'The Garden', kind: '组织',
+    aliases: ['植园'],
+    summary: '11局医疗部下设的研究所，约百人兼任研究员，由爱丽丝·赫克托林负责。专攻铎与生物体的耦合、神经接口、持有者改造等前沿方向。',
+    meta: [
+      ['阵营', '11局 · 医疗部'],
+      ['负责人', '爱丽丝·赫克托林']
+    ]
+  },
+  'wu-guard': {
+    zh: '中央护卫队【乌】', en: 'Wu · Central Guard', kind: '组织',
+    aliases: ['中央护卫队', '禁卫军', '乌'],
+    summary: '几乎只驻扎在雁临的特殊精锐部队，中央意志和权威的象征，除了11局以外唯一持有者比例超过50%的部队。指挥官级别大校，具体人数不明，推测5000-1万人。负责中央直属保护任务、镇压极端叛乱与高威胁战斗、对其他组织实施强制执行的最后方案。',
+    meta: [
+      ['阵营', '央联 · 中央直属'],
+      ['指挥官', '元赫']
+    ]
+  },
+  'bureau7': {
+    zh: '第7特别行动局', en: 'Bureau Seven', kind: '组织',
+    aliases: ['第7特别行动局', '7局', '第七局'],
+    summary: '负责前罗兹涅地区和中央走廊（北线）的监视、善后、镇压等工作，总部位于奥布列克。人员众多，秘密警察部队与公开部队的结合体。',
+    meta: [
+      ['阵营', '央联'],
+      ['驻地', '奥布列克']
+    ]
+  },
+  'jianzhao': {
+    zh: '剑草', en: 'Sword Grass', kind: '组织',
+    aliases: ['剑草', '剑草游击队', '剑草山地纵队'],
+    summary: '南岛反抗军主力之一，由"母亲"奥巴努在塔娅死后建立，潜入月食岛后一手组织起来。山地纵队由泰奥·巴拉卡指挥，雾之山战役中加入母亲。',
+    meta: [
+      ['阵营', '南岛反抗军'],
+      ['关联', '奥巴努 · 泰奥·巴拉卡 · 雾之山']
+    ]
+  },
+  'chirui': {
+    zh: '赤蕊', en: 'Crimson Pistil', kind: '组织',
+    aliases: ['赤蕊', '红鹭馆'],
+    summary: '南岛反抗军在月食岛留下的部分成员衍生的城市/情报支线，与剑草并行。蓝是其重要高层，伊祖露城区负责人之一，红鹭馆节点总管。火烧红鹭馆、杀建筑师计划的最大策划人和负责人。',
+    meta: [
+      ['阵营', '南岛反抗军'],
+      ['关联', '蓝 · 伊祖露 · 红鹭馆']
+    ]
+  },
+  'ninth-army': {
+    zh: '第九军', en: 'Ninth Army', kind: '组织',
+    aliases: ['第九军', '机动旅', '特殊机动旅'],
+    summary: '帝国进军南岛的先头精锐部队，特殊机动旅 + 别的特殊部队里有数十名序列级持有者，是帝国顶级单兵战力。亚当·索罗斯曾在其中担任第一突击战斗群执行官。瓦拉尔行动后五年来第一次蒙受重大损失，先头部队被召回。',
+    meta: [
+      ['阵营', '维斯冈特帝国'],
+      ['关联', '亚当·索罗斯 · 瓦拉尔行动 · 司令部暗杀']
+    ]
+  },
+
+  'wenyu': {
+    zh: '温瑜', en: 'Wen Yu', kind: '人物',
+    profile: true, glyph: '瑜',
+    aliases: ['温瑜'],
+    stats: [
+      ['性别', '男'], ['年龄', '26'], ['身高', '176cm'],
+      ['出身', '雁临'], ['持有者', '否'],
+      ['职务', '11局信息部部长'],
+      ['军衔', '无']
+    ],
+    summary: '11局信息部部长，无军籍，雁临大学dropout。对政府和体制极其不信任的反叛者，因为这个原因在大学时跟王灯宇出现重大分歧，主动/被强制退学。慵懒、敏锐而自信的年轻人，长期靠浓茶摄入咖啡因，习惯将11制服穿在最外侧以便随时脱掉。',
+    meta: [['阵营', '11局'], ['身份', '信息部部长'], ['关键词', '黑客 · dropout']]
+  },
+  'alice': {
+    zh: '爱丽丝·赫克托林', en: 'Alice Hectorine', kind: '人物',
+    profile: true, glyph: '爱',
+    aliases: ['爱丽丝·赫克托林', '爱丽丝'],
+    quote: '那里什么都没有，爱丽丝⋯',
+    stats: [
+      ['性别', '女'], ['年龄', '36'], ['身高', '168cm'],
+      ['出身', '马绍罗群岛'], ['持有者', '是 (非战斗型)'],
+      ['职务', '医疗部部长 · 植园负责人']
+    ],
+    summary: '11局医疗部部长，兼任植园负责人，高级研究员。马绍罗地区人，前女友是罗述博士的直系后代，死于一场科研事故，爱丽丝的左眼也因此失明、摘除并进行了铎的永久性植入与改造，神经可以短时间内感知到更敏锐、更深层次的结构，使用时虹膜变成更亮的橄榄色。\n\n非战斗型持有者，能够操纵较轻体积的铎。第一次地动后是少数怀疑此次事件可能为人为、罪魁祸首极可能是帝国的人之一。',
+    meta: [['阵营', '11局'], ['关键词', '植园 · 罗述博士直系']]
+  },
+  'wangdengyu': {
+    zh: '王灯宇', en: 'Wang Dengyu', kind: '人物',
+    profile: true, glyph: '灯',
+    aliases: ['王灯宇'],
+    stats: [
+      ['性别', '女'], ['年龄', '27'], ['身高', '175cm'],
+      ['出身', '雁临'], ['持有者', '否'],
+      ['职务', '11局总监察官 · 监察部负责人'],
+      ['代号', '镜']
+    ],
+    summary: '11局新任总监察官/监察部负责人，温瑜（曾经）的高中和大学学姐。专属识别代码【镜】。雁临人。\n\n调任之前就职于中央监察总署和若干地方监察局，刚刚解决了中央某起重要案件，因此被赋予极大的信赖与权力，来到11局调查前任总监察官意外身亡的事，与此同时解决此机构内的不稳定因素。外表开朗干练精力旺盛，但认真起来时压迫感极强，讲话带有官员的滴水不漏。',
+    meta: [['阵营', '央联监察总署 → 11局监察部'], ['关键词', '镜 · 监察']]
+  },
+  'calder': {
+    zh: '叶卡尔德', en: 'Calder Ye', kind: '人物',
+    profile: true, glyph: '紫',
+    aliases: ['叶卡尔德'],
+    stats: [
+      ['性别', '男'], ['年龄', '25'], ['身高', '187cm'],
+      ['出身', '汇川 · 混血'], ['持有者', '是 (战斗型)'],
+      ['装甲', '紫电'], ['军衔', '上尉'],
+      ['职务', '行动部第一中队队长']
+    ],
+    summary: '行动部第一中队队长，桀骜、不服管的类型，但逻辑清晰。对易渊比起"对上司的尊重"，更多的是被打服了。装甲【紫电】展开速度极快，擅长多琉柜同时操作。',
+    meta: [['阵营', '11局'], ['关键词', '紫电 · 第一中队']]
+  },
+  'jane': {
+    zh: '简度', en: 'Jane', kind: '人物',
+    profile: true, glyph: '牵',
+    aliases: ['简度'],
+    stats: [
+      ['性别', '女'], ['年龄', '30+'], ['身高', '168cm'],
+      ['持有者', '是 (战斗型)'],
+      ['装甲', '牵水'], ['军衔', '少校'],
+      ['职务', '行动部第二中队队长']
+    ],
+    summary: '行动部第二中队队长，跟易渊合作时间最长的行动部成员，他的半个前辈。第二中队属于特殊间谍/特工类部队，专司grey zone operation与infiltration。',
+    meta: [['阵营', '11局'], ['关键词', '牵水 · 第二中队 · 渗透']]
+  },
+  'ariana': {
+    zh: '阿利安娜·亚兰', en: 'Ariana Aran', kind: '人物',
+    profile: true, glyph: '锯',
+    aliases: ['阿利安娜·亚兰', '阿利安娜'],
+    stats: [
+      ['性别', '女'], ['年龄', '23'], ['身高', '179cm'],
+      ['出身', '西大陆西南 · 东大陆混血'],
+      ['持有者', '是 (战斗型)'],
+      ['装甲', '锯琴II型'], ['军衔', '上尉'],
+      ['职务', '行动部第七中队队长 → 副部长']
+    ],
+    summary: '行动部第七中队中队长，在易渊罗兹涅身份暴露半年后升任副部长，最年轻的中队长，战斗天才，故事开始时加入11局两年半。银白色中长鬈发——维斯冈特皇室的象征性外表之一，因此装甲【锯琴】被发现后引起了帝国人的极大关注。姐姐朱恩死于长夜危机。',
+    meta: [['阵营', '11局'], ['关键词', '锯琴II型 · 第七中队']]
+  },
+  'june': {
+    zh: '朱恩·亚兰', en: 'June Aran', kind: '人物',
+    profile: true, glyph: '锯',
+    aliases: ['朱恩·亚兰', '朱恩'],
+    stats: [
+      ['性别', '女'], ['身高', '177cm'],
+      ['享年', '30'],
+      ['持有者', '是 (战斗型)'],
+      ['装甲', '锯琴'],
+      ['职务', '行动部副部长']
+    ],
+    summary: '阿利安娜的姐姐，行动部副部长，装甲【锯琴】持有者，死于长夜危机。除头发长度外与阿利安娜长相极其相似。',
+    meta: [['阵营', '11局'], ['关键词', '锯琴 · 长夜危机']]
+  },
+  'zeiden': {
+    zh: '伊泽登·李·卡恩莱', en: 'Zeiden Eli Kenley', kind: '人物',
+    profile: true, glyph: '蝰',
+    aliases: ['伊泽登·李·卡恩莱', '伊泽登'],
+    stats: [
+      ['性别', '男'], ['身高', '180cm'],
+      ['享年', '29'],
+      ['持有者', '是 (战斗型)'],
+      ['装甲', '蝰蛇'], ['军衔', '少校'],
+      ['职务', '行动部副部长']
+    ],
+    summary: '行动部副部长之一，装甲【蝰蛇】持有者。打理整齐的浅金色短发，钴蓝色眼睛，佩戴近四方形黑框眼镜。',
+    meta: [['阵营', '11局'], ['关键词', '蝰蛇']]
+  },
+  'shuangchen': {
+    zh: '双晨', en: 'Shuang Chen', kind: '人物',
+    profile: true, glyph: '晨',
+    aliases: ['双晨'],
+    stats: [
+      ['性别', '女'], ['年龄', '19'], ['身高', '160cm'],
+      ['出身', '雁临'], ['持有者', '否'],
+      ['职务', '11局监察员']
+    ],
+    summary: '11局监察员，跟随王灯宇一起上任，网络安全专攻，因此被分配监察信息部有关事务。',
+    meta: [['阵营', '11局监察部'], ['关键词', '网络安全 · 信息部对口']]
+  },
+
+  'yuanhe': {
+    zh: '元赫', en: 'Yuan He', kind: '人物',
+    profile: true, glyph: '赫',
+    aliases: ['元赫'],
+    stats: [
+      ['性别', '男'], ['年龄', '45'], ['身高', '191cm'],
+      ['出身', '雁临'], ['持有者', '是 (战斗型)'],
+      ['装甲', '赤轮 (重装型)'],
+      ['军衔', '大校 / 准将'],
+      ['职务', '中央护卫队【乌】指挥官']
+    ],
+    summary: '中央护卫队【乌】指挥官，单体战斗力最强、也是最早的一批持有者。极其擅长将持有者部队的不可控性压缩到最低限度，中央意志象征与秩序维护者、压舱石。已婚育有一女，曾经和11局在某次任务中短暂合作过。',
+    meta: [['阵营', '央联 · 中央直属'], ['关键词', '赤轮 · 压舱石']]
+  },
+
+  'arthus': {
+    zh: '阿尔瑟斯·特里斯坦', en: 'Arthus Tristan', kind: '人物',
+    profile: true, glyph: '阿',
+    aliases: ['阿尔瑟斯·特里斯坦', '阿尔瑟斯', '阿尔'],
+    stats: [
+      ['性别', '男'], ['年龄', '25'], ['身高', '183cm'],
+      ['出身', '维斯冈特帝国'], ['持有者', '是 (战斗型)'],
+      ['装甲', '伊什薇 / Ischwie'], ['序列', '21'],
+      ['军衔', '少校']
+    ],
+    summary: '原服役于第九军，跟随亚当一起调任蜂巢，曾经是他的副官，亚当的发小和最信任的搭档。装甲【伊什薇】，维斯冈特神话中的信使/送信神，正面强攻能力不强，但速度极快，擅长游斗、潜伏和侦查。跟亚当比起来反而是精神状态更正常、没有存在主义危机的那一位。',
+    meta: [['阵营', '维斯冈特帝国 · 蜂巢'], ['关键词', '伊什薇 · 副官']]
+  },
+  'rene': {
+    zh: '雷内·克劳塞维茨', en: 'Rene Clausewitz', kind: '人物',
+    profile: true, glyph: '雷',
+    aliases: ['雷内·克劳塞维茨', '雷内'],
+    stats: [
+      ['性别', '男'], ['年龄', '31'], ['身高', '190cm'],
+      ['出身', '维斯冈特帝国'], ['持有者', '是 (战斗型)'],
+      ['军衔', '中校'],
+      ['职务', '特殊机动旅第一战斗群指挥官']
+    ],
+    summary: '热海战争前于第九军宪兵队就职，被调到第一战斗群用于加强指挥，热海战争结束后回归宪兵队。极其稳重可靠。',
+    meta: [['阵营', '维斯冈特帝国 · 第九军'], ['关键词', '宪兵队 · 第一战斗群']]
+  },
+  'feuerhild': {
+    zh: '菲尔希尔德·勒维', en: 'Feuerhild Lowe', kind: '人物',
+    profile: true, glyph: '菲',
+    aliases: ['菲尔希尔德·勒维', '菲尔希尔德'],
+    stats: [
+      ['性别', '女'], ['年龄', '27'], ['身高', '180cm'],
+      ['持有者', '是 (战斗型)'],
+      ['装甲', '多恩丽赫 / Dornlicht'], ['序列', '6'],
+      ['军衔', '中校']
+    ],
+    summary: '鲜红发色，红色眼睛，火焰一般的女性。装甲【多恩丽赫】，序列排名第六，维斯冈特神话中的丛林与狩猎之神。',
+    meta: [['阵营', '维斯冈特帝国'], ['关键词', '多恩丽赫 · 序列6']]
+  },
+  'hui': {
+    zh: '虺', en: 'Hui', kind: '人物',
+    profile: true, glyph: '虺',
+    aliases: ['虺'],
+    stats: [
+      ['性别', '女'], ['年龄', '未知'], ['身高', '170cm'],
+      ['出身', '长原 (?)'],
+      ['职务', '蜂巢高层人员']
+    ],
+    summary: '蜂巢高层人员，蜂的克隆母体，某种超越普通人类的存在，长原"人"。妩媚而带着某种冰冷气质的美丽女性，身上的弧线很多，但是在某些角度显出一种奇特的危险性。',
+    meta: [['阵营', '维斯冈特帝国 · 蜂巢'], ['关键词', '克隆母体 · 长原']]
+  },
+  'pertriz': {
+    zh: '珀尔翠丝·索罗斯', en: 'Pertriz Soros', kind: '人物',
+    profile: true, glyph: '珀',
+    aliases: ['珀尔翠丝·索罗斯', '珀尔翠丝', '珀尔'],
+    stats: [
+      ['性别', '女'], ['年龄', '17'], ['身高', '167cm'],
+      ['出身', '维斯冈特帝国'], ['持有者', '否 (未成年)'],
+      ['军衔', '准尉'],
+      ['职务', '军校学生']
+    ],
+    summary: '亚当·索罗斯的妹妹，棕色中长卷发，比亚当略淡的棕色眼睛。母亲有南岛血统，因此她和亚当的铎适配值才如此之高。',
+    meta: [['阵营', '维斯冈特帝国'], ['关键词', '索罗斯家次女']]
+  },
+  'isaak': {
+    zh: '伊萨克·冯·维厄海姆', en: 'Issak Von Velhaim', kind: '人物',
+    profile: true, glyph: '冯',
+    aliases: ['伊萨克·冯·维厄海姆', '伊萨克'],
+    stats: [
+      ['性别', '男'], ['年龄', '39'], ['身高', '190cm'],
+      ['出身', '维斯冈特帝国'], ['持有者', '是 (战斗型)'],
+      ['装甲', '维厄海姆 / Velhaim'], ['序列', '5'],
+      ['职务', '大公爵 · 维尔海姆家家主 · 枢密院列席']
+    ],
+    summary: '皇室远亲。装甲【维厄海姆】，序列排名第五，维斯冈特神话中镇守圣山皇冠的骑士。如今很少使用装甲，几乎不离境、不参与竞技，更多做象征意义。',
+    meta: [['阵营', '维斯冈特帝国 · 皇室远亲'], ['关键词', '维厄海姆 · 枢密院']]
+  },
+
+  'ian-noah': {
+    zh: '伊恩·诺亚', en: 'Ian Noah', kind: '人物',
+    profile: true, glyph: '伊',
+    aliases: ['伊恩·诺亚', '伊恩'],
+    quote: '死亡是不需要练习的，因此努力活下去。',
+    stats: [
+      ['性别', '男'], ['身高', '176cm'],
+      ['享年', '35'],
+      ['出身', '罗兹涅'], ['持有者', '是 (战斗型)'],
+      ['军衔', '上校']
+    ],
+    summary: '罗兹涅特种部队军官，莱莎的姐姐，易渊在罗兹涅时的前上级和导师，北陆战争后期晋升为上校，死于战争结束前夜。在死前告诉易渊"死亡是不需要练习的，因此努力活下去"——易渊的名字"易渊"即来自伊恩的央联通用语化版本。',
+    meta: [['阵营', '罗兹涅 (前)'], ['关键词', '易渊的导师 · 名字之源']]
+  },
+  'ryza': {
+    zh: '莱莎·诺亚', en: 'Ryza Noah', kind: '人物',
+    profile: true, glyph: '莱',
+    aliases: ['莱莎·诺亚', '莱莎'],
+    stats: [
+      ['性别', '女'], ['身高', '160cm'],
+      ['享年', '26'],
+      ['出身', '罗兹涅'], ['持有者', '否']
+    ],
+    summary: '伊恩的妹妹，大学学生，文学/新闻学专业，在昂德斯沃尔战争后成为罗兹涅当地独立报社的匿名作者/领导人之一，与此同时做各种零工补贴家用。被人设计，在战后第二个冬天的宴会中作为侍女服务时，被一个喝醉了的符蓝崴煤炭商人奸杀。是6的启蒙老师、精神支柱和图腾之一。',
+    meta: [['阵营', '罗兹涅 (前)'], ['关键词', '6的启蒙']]
+  },
+  'seax': {
+    zh: '6 / Seax', en: 'Six / Seax', kind: '人物',
+    profile: true, glyph: '6',
+    aliases: ['6/Seax', 'Seax', '6'],
+    stats: [
+      ['性别', '女'], ['年龄', '21'], ['身高', '165cm'],
+      ['出身', '罗兹涅 (萨迪斯莎朗)'], ['持有者', '否 (适配度极高)']
+    ],
+    summary: '出生于罗兹涅首都郊区的萨迪斯莎朗教堂，孤儿，由古板老修女卡黛丝监护下成长。聪明早慧、好奇心强但长期营养不良，灵性（对铎的感知能力）极其之强。\n\n央联-罗兹涅战争开始后，教堂里除了她以外的人都在轰炸中死去。挣扎求生一年半后与莱莎重逢，短暂幸福后莱莎被符蓝崴商人奸杀，6陷入巨大的愤怒和痛苦中，决心为她报仇。商人被她重伤，但在她给他致命一击之前就意外死去；濒死的6被熟人搭救，潜逃出罗兹涅首都，开始漫长的流浪生涯。后期是罗兹涅地区解放运动的领导人之一。',
+    meta: [['阵营', '罗兹涅地区 · 解放运动'], ['关键词', '萨迪斯莎朗 · 莱莎之死']]
+  },
+
+  'obanu': {
+    zh: '奥巴努·奥古布', en: 'Obanu Ogubu', kind: '人物',
+    profile: true, glyph: '母',
+    aliases: ['奥巴努·奥古布', '奥巴努', '母亲'],
+    quote: '我们变成了沉默的东西。我们变成山，变成大树，变成那些穿行在山间树中的动物们。',
+    stats: [
+      ['性别', '女'], ['年龄', '53'],
+      ['出身', '月食岛'], ['持有者', '是']
+    ],
+    summary: '“母亲”。南岛反抗军在军事、政治与精神意义上的最高领袖，一手将被侵略势力打作一团散沙的南岛人重新团结起来。据考证，其本名为奥巴努·奥古布——“奥巴努”是南岛剑草的一种别称，直译为“豹子的舌头”；“奥古布”是她的人民赐予她的名字，意思是“暴风和潮汐的守护者”。守护与进攻，海与深林，两种不同但并不相互排斥的东西，代表着南岛灵魂的两面。\n\n月食岛人，年轻时主要做助产士和教师的工作，25–30 岁间曾随南岛的船只环绕了热海一周，并在那里生下了塔娅。战前致力于解决胡里木岛与月食岛的经济差异、阶级分化、贸易腐败问题，对南岛政府仍抱有希望。塔娅死后彻底放弃和平斗争路线，逃脱抓捕后携部分医疗资源潜入月食岛，一手组织起了剑草。月食岛留下部分成员则是赤蕊的前身。\n\n雁历 75 年初雾之山战役中，以五千人不到的不成建制部队、借杜乌兰山脉的险与雨季山洪，重创第九军山地师主力，将挑衅者逆推回月食岛东北角，从此被占领区奥为主帥。传言她能听见金属的声音，就像动物听见地动那样；考证说，雾之山之后，她与杜乌兰山中的植被之间形成了某种诡异的共鸣。\n\n雁历 78 年 12 月 1 日，在南岛最重要的传统节日当天，母亲与 11 局联手于红鹭馆刺杀建筑师，判处帝国柔性同化路线死刑，外界认为这是帝国在南岛重建附属秩序的最后可能被主动摧毁。\n\n79 年初瓦拉尔行动中，她选择与铎矿融合，以自我引爆般的方式拖住亚当·索罗斯，为反抗军赢得了时间，也让亚当第一次质疑自己的立场。死亡当夜，反抗军同时发出她死时的异象与建国声明，两者合为一场叙事武器，完成了“母亲”这个符号在南岛人中的最后升华。',
+    meta: [
+      ['阵营', '南岛反抗军'],
+      ['职务', '剑草与赤蕊联盟总领袖'],
+      ['关键词', '母亲 · 雾之山 · 瓦拉尔之死']
+    ]
+  },
+  'taya': {
+    zh: '塔娅', en: 'Taya', kind: '人物',
+    profile: true, glyph: '塔',
+    aliases: ['塔娅'],
+    stats: [
+      ['性别', '女'], ['享年', '21'],
+      ['出身', '月食岛 / 灰海'], ['持有者', '否']
+    ],
+    summary: '奥巴努唯一的女儿，名字是热海一种象征吉祥的候鸟。极其聪明，远比蓝更理想主义。曾经在大学时写过论文抨击南岛的社会分化，直截了当地写道应该烧掉红鹭馆。战前差点收到了雁临大学录取通知书，差点就去西联读研究生了，但战争开始后选择放弃，开始搞社会运动，死于一场雁历事件。',
+    meta: [['阵营', '南岛'], ['关键词', '母亲之女 · 红鹭馆']]
+  },
+  'lan': {
+    zh: '蓝', en: 'Lan', kind: '人物',
+    profile: true, glyph: '蓝',
+    aliases: ['蓝'],
+    stats: [
+      ['性别', '女'], ['年龄', '24'],
+      ['出身', '伊祖露贫民窟'], ['持有者', '否']
+    ],
+    summary: '赤蕊重要高层人员，伊祖露城区负责人之一，红鹭馆节点总管，可以直接与母亲沟通。赛汶和塔娅的高中同学。在首都的贫民窟长大，红鹭馆是幼年的记忆，因为奥巴努组织的项目破格进入大学。火烧红鹭馆、杀建筑师计划最大的策划人和负责人。真正意义上南岛的孩子。',
+    meta: [['阵营', '南岛 · 赤蕊'], ['关键词', '红鹭馆 · 建筑师']]
+  },
+  'sevin': {
+    zh: '赛汶', en: 'Sevin', kind: '人物',
+    profile: true, glyph: '汶',
+    aliases: ['赛汶'],
+    stats: [
+      ['性别', '男'], ['年龄', '24'],
+      ['出身', '胡里木岛'], ['持有者', '否']
+    ],
+    summary: '建筑师的翻译，胡里木岛本地人，家境相对优渥（父母亲是中产阶级）。在塔娅死去之后彻底放弃了暴力斗争路线，希望战争早些结束。知道一些赤蕊和蓝的事情，但并没有告发她。',
+    meta: [['阵营', '南岛 · 占领区平民'], ['关键词', '建筑师翻译 · 旁观者']]
+  },
+  'theo': {
+    zh: '泰奥·巴拉卡', en: 'Theo Baraka', kind: '人物',
+    profile: true, glyph: '泰',
+    aliases: ['泰奥·巴拉卡', '泰奥'],
+    stats: [
+      ['性别', '男'], ['年龄', '45'],
+      ['持有者', '否'],
+      ['军衔', '中校 (前)'],
+      ['职务', '剑草山地纵队指挥官']
+    ],
+    summary: '原本是南岛政府军月食岛部的军官，南岛宣布战败后拒绝投降，起初在月食岛东北部活动，因为帝国-乌维文联军压境逐渐退入雾之山。雾之山战役中加入母亲。左手在早年间的一次事故里断了。',
+    meta: [['阵营', '南岛反抗军 · 剑草'], ['关键词', '雾之山 · 山地纵队']]
+  },
+  'natalie': {
+    zh: '娜塔莉·所罗门', en: 'Natalie Solomon', kind: '人物',
+    profile: true, glyph: '娜',
+    aliases: ['娜塔莉·所罗门', '娜塔莉', '娜塔'],
+    quote: '我可以成为任何人⋯而不是被造出来的东西。',
+    stats: [
+      ['性别', '女'], ['身高', '163cm'],
+      ['享年', '25'],
+      ['出身', '瓦伦图'], ['持有者', '是 (战斗型)'],
+      ['装甲', '蔷薇']
+    ],
+    summary: '洛狄斯的堂姐，已经从所罗门家族被除名、失格但是非常强大的持有者，因此尸体在死后被家族回收，作为重要财产存放于实验室中。\n\n灿金色中长鬈发，经常染成其他不起眼的颜色，湖绿色眼睛，后期因为聚色反应失明，从瞳孔开始逐渐变成金红色。从各方面意义上都显得有些娇小，外表似乎停滞在了少年与青年之间的某个时间点。\n\n年少时意外接触高浓度铎，因此有间歇性发作的严重幻觉与精神疾病，也因为这个原因选择离开所罗门家。是洛人格底色与丰盈情感的来源；在昂德斯沃尔山脉与易渊结伴旅行、互相救赎，最终病重时请求易渊亲手送她解脱——刀在行刑后折断，葬于此地。',
+    meta: [['阵营', '所罗门家族 (除名)'], ['关键词', '蔷薇 · 洛与渊的纽带']]
+  },
+
+  'rosu': {
+    zh: '凯瑟琳·吕恩波朗·罗述', en: 'Catherine Luenboland Rosu', kind: '人物',
+    aliases: ['凯瑟琳·吕恩波朗·罗述', '罗述博士', '罗述'],
+    summary: '金属铎的研究、发现第一人，伟大的科学家。马绍罗群岛出身。少年时因为某场事故下肢瘫痪，长期休养时大量观察自家后院的花草——在植物身上，流金的交互表现规律性强、变量少、反应慢且明显，容易被记录。罗氏波形的"罗"即源于她的姓氏。',
+    meta: [['阵营', '科学界 · 马绍罗'], ['关键词', '铎的发现者']]
+  },
+  'solomon': {
+    zh: '所罗门家族', en: 'House Solomon', kind: '组织',
+    aliases: ['所罗门家族', '所罗门'],
+    summary: '瓦伦图老牌家族之一，在北陆站中后期开始向央联伸出触手。跨国军事公司、铎精炼和制造产业的寡头之一，长期以财富、政治影响与情报网络支持第11局这类特设机构。',
+    meta: [
+      ['阵营', '央联'],
+      ['关联', '第11局 · 央联管理协会']
+    ]
+  },
+  'visgant': {
+    zh: '维斯冈特帝国', en: 'the Wiescaute Empire', kind: '国家',
+    logo: 'assets/visgant-logo.png',
+    aliases: ['维斯冈特帝国', '维斯冈特', '帝国'],
+    summary: '位于灰海以东、以扩张主义和神序列体系闻名的大陆级帝国。其军政上层与蜂巢科研体系高度绑定，奥尔希特冠冕作为合法性象征，神序列持有者作为锋面武器。热海战争与光海前夕的两次大型军事行动，都直接出自帝国最高层。',
+    meta: [
+      ['关联', '蜂巢 · 奥尔希特冠冕 · 神序列体系']
+    ]
+  },
+  'central-union': {
+    zh: '中央联合政体', en: 'the Central Union Polity', kind: '国家',
+    logo: 'assets/centralunion-logo.png',
+    aliases: ['央联', '西联', '中央', '中央联合政体'],
+    summary: '又称西联（同一政体的不同称呼）、中央联合政体。位于西大陆中部、由多个旧政权联合形成的政治体，是维斯冈特帝国之外的另一极。首都雁临。在长夜危机之后，央联建立了一套新的监察与特设机构秩序，第11局正是在这套秩序下获得行动空间。',
+    meta: [
+      ['关联', '第11局 · 第七特别行动局 · 所罗门家族']
+    ]
+  },
+  'ronez': {
+    zh: '罗兹涅共和国', en: 'the Holy Republic of Rozne', kind: '国家',
+    logo: 'assets/rozne-logo.png',
+    aliases: ['罗兹涅', '北陆', '前罗兹涅', '前罗兹涅地区', '罗兹涅共和国'],
+    summary: '位于央联走廊以北的旧国家与地区。罗兹涅旧政权在北陆战争中被央联军队击溃，国家解体后，原罗兹涅人长期被作为"前罗兹涅"身份处于灰色地带。第七特别行动局长期负责该区域的监视、善后和镇压。易渊正是在罗兹涅旧军体系中度过少年期。',
+    meta: [
+      ['状态', '已解体'],
+      ['关联', '北陆战争 · 第七特别行动局']
+    ]
+  },
+  'duo': {
+    zh: '铎 / 流金', en: 'Duo (Liquid Gold)', kind: '物质',
+    aliases: ['铎', '流金', '殁钢'],
+    summary: '一种亲有机物、并且可以对生物体电信号（包括人类的神经信号、植物的电位变化与形态响应）反应——"理解"——的液-固态金属。广泛分布于地下与海底等高压地区，少部分于罗兹涅与南方诸岛的浅层地壳与地表分布，因此在很长一段时间内少有人发现，发现早期被认为是极其稀有的。\n\n是装甲、持有者武装、琉柜的核心原料；其使用需要亲和者、植入接口、琉柜等一整套生物-金属生态。在矿区、富集地层中可以与外界大规模场耦合（光海计划即依赖这一原理）。',
+    meta: [
+      ['类型', '亲有机金属 · 液固态'],
+      ['分布', '高压地区 / 南岛 / 罗兹涅'],
+      ['关联', '持有者 · 装甲 · 琉柜 · 光海']
+    ]
+  },
+  'holder': {
+    zh: '持有者', en: 'Holder', kind: '概念',
+    aliases: ['持有者', '适格者'],
+    summary: '与铎的亲和度超越阈值、可以进行植入手术并操纵铎的特殊群体。在完成植入手术、能够操纵装甲后，才会被称为持有者（在此之前只能说是有资格成为持有者）。其组织环境与免疫系统是"稳定/亲和表型"，更容易在流金表面形成稳定低炎症的亲和界面层；普通人形成的界面层会不稳定、绝缘、伴有严重炎症反应——也可以说是被感染了。\n\n东西大陆均有分布，铎富集区域出现概率更高——长期微量暴露使部分人群体内已稳定存在微量自然流金（南岛人的适配率因此较高）。在植入神经接口与定量流金后，因代谢加快，体温较正常人略高约2℃。\n\n与传统士兵不同，铎的操控需要极其精确且大胆的想象力，或近乎本能的直觉。因此持有者服从性较低，被反对者称为"难以控制的暴走武器"——也有如元赫这样完美控制自己情绪的异类。',
+    meta: [
+      ['本质', '高亲和度 · 稳定表型'],
+      ['生理特征', '体温 +2℃ · 代谢加快'],
+      ['关联', '铎 · 植入接口 · 琉柜 · 装甲']
+    ]
+  },
+  'mech': {
+    zh: '装甲 / 装甲', en: 'Armor / Mech', kind: '装备',
+    aliases: ['装甲', '装甲', '外覆装甲'],
+    summary: '进行过一定程度上预编程、储存在琉柜中、必要时以特定形态展开相变形成固态的特殊流金盔甲（武器也算在这一范畴内）。机动性高、极端强、可在短时间内改变战局的超高端战略级战力，使用时限严格。\n\n三种正式作战形态（不含休眠/失控）：形态1·预展开——琉柜接口打开、神经链接正式激活，微量流金丝线连接植入接口与琉柜，同步率接近100%；形态2·初动——全量展开，进入作战状态；形态3·全功率——耗能极高，只在以秒计数的时间窗口内出现（一般用于与敌方持有者近距离交火）。\n\n按类型可分为轻装/重装/远程/独特型，以及需要高同步的"神序列"级别装甲。',
+    meta: [
+      ['形态', '预展开 / 初动 / 全功率'],
+      ['存储', '琉柜'],
+      ['关联', '持有者 · 神经链接 · 序列']
+    ]
+  },
+  'liugui': {
+    zh: '琉柜', en: 'Liugui · Reliquary', kind: '装备',
+    aliases: ['琉柜'],
+    summary: '收容铎的容器。内部真空，使用特殊磁场对铎进行约束。非使用状态下可在罗氏波探测中隐身，必配生物识别机制与分级授权，内置高密度能量储备。价值虽不及铎本身，但仍较难制造——战场极端情况下可丢弃，但不小心丢掉需要写报告。\n\n武装型：较轻、结构偏薄。装有预处理与植入结构记忆的铎可直接战斗使用。持有者日常携带一个，全武装状态下携带≤5个，重装型携带更多。可快速接入神经链接，部分型号支持战场更换/重载。\n\n科研/运输型：重型耐压设计，可承受高震动与温差。安全机制更复杂，封闭性高，配有环境模拟接口，用于在封闭状态下观察铎对不同变量的响应。',
+    meta: [
+      ['类型', '武装 / 科研 / 运输'],
+      ['特性', '真空磁约束 · 罗氏波隐身 · 生物识别'],
+      ['关联', '铎 · 装甲 · 植入接口']
+    ]
+  },
+  'implant': {
+    zh: '植入接口', en: 'Implant Interface', kind: '装备',
+    aliases: ['植入接口', '接口'],
+    summary: '公认接口位置：后颈、脊柱上缘（接近第一节）、前胸（锁骨），以及3~n处不等的四肢辅助接口。外形各异，看上去是介于金属与骨质之间的复合材料。\n\n职能：放大、整合、稳定体内的生物与流金信号；诱导体内流金形成"通往此处"的记忆，在接口附近形成稳定界面层；设定限制以防失控/过度使用——类似电闸，超载会断开。',
+    meta: [
+      ['常见位置', '后颈 · 脊柱 · 锁骨 · 四肢'],
+      ['关联', '持有者 · 琉柜 · 神经链接']
+    ]
+  },
+  'neural-link': {
+    zh: '神经链接', en: 'Neural Link', kind: '概念',
+    aliases: ['神经链接', '神经耦合'],
+    summary: '持有者使用装甲与武装的核心机制。路径：大脑发出动作意图 → 经神经与体内若干流金界面层传导至植入接口附近（过程中神经活动改变局部离子环境与膜电位，流金进入激活态，聚色即为副产物之一）→ 植入接口将信号送至琉柜（提供生物认证，类似基因认证）→ 琉柜内流金被唤醒，进入展开状态。\n\n体内微量流金充当"钥匙"：向外部流金提供认证与命令，转译人体神经电信号变成其他流金可以识别的变化。',
+    meta: [
+      ['路径', '脑 → 接口 → 琉柜 → 装甲'],
+      ['副产物', '聚色'],
+      ['关联', '持有者 · 植入接口 · 琉柜']
+    ]
+  },
+  'juse': {
+    zh: '聚色', en: 'Chromatic Convergence', kind: '现象',
+    aliases: ['聚色', '永久聚色'],
+    summary: '持有者开始/准备开始使用装甲时的特征性视觉反应，根据自身体质与铎的特性进行反应。表现为虹膜发光，颜色不一，一般是金属燃烧或荧光色调。一般开始于装甲初动时；也常被持有者用作特殊威慑手段。是判断是否为持有者的重要标准之一，略显眼，因此不少人在作战时会佩戴目镜遮挡。\n\n永久聚色：少数高适配者（如神序列装甲持有者）在长期深度神经连接后，身体与铎之间的基础波动无法完全断开。其神经系统处于常态轻激活状态，随时可进入展开状态，虹膜因此保持发光。亚当·索罗斯即为典型——其虹膜因永久聚色从棕色变为介于棕色与赤金色之间的颜色。',
+    meta: [
+      ['表现', '虹膜发光'],
+      ['关联', '持有者 · 装甲 · 神序列']
+    ]
+  },
+  'rossi-wave': {
+    zh: '罗氏波形 / 洛施波', en: 'Rossi Waveform (Loshe Wave)', kind: '概念',
+    aliases: ['罗氏波形', '洛施波', '洛施波探测', '洛施波探测器'],
+    summary: '流金在相变、重排、神经耦合时产生的一组可被观测的复合信号。流金响应神经信号、改变形态时，内部电荷分布与导电路径快速变化，产生可测的局部电磁异常（类比脑电、心电、磁流变）。在展开时被放大，产生可被观测的电磁波。\n\n大尺度上，机械变化产生电信号——例如地震磁扰动——也会留下同型迹象。是央联与帝国识别"持有者"身份的核心技术。易渊作为非持有者，体内不产生罗氏波形——这让他在整个洛施波探测体系中成为无法被看见的影子，也是他成为指挥官与隐隐者的关键。',
+    meta: [
+      ['类型', '物理 · 探测'],
+      ['关联', '持有者 · 洛施波探测器']
+    ]
+  },
+  'aursicht': {
+    zh: '奥尔希特', en: 'Aursicht', kind: '装甲 · 神话',
+    aliases: ['奥尔希特', '奥尔希特冠冕', '奥尔希特的反证'],
+    summary: '维斯冈特神话中黄金瞳的盲眼女神。她将自己的双目从眼眶中剜出、丢进火焰中熔炼，它们从此成为她最致命的武器。司掌处决。\n\n亚当·索罗斯的装甲代号【奥尔希特】，序列排名3。\n奥尔希特这一名字，从某种程度上预示了亚当年少与年轻时的命运：做一把无比锋利的刀，为帝国斩杀一切敌人、剪除一切烦恼，但与此同时双眼是失明的——不去看、不去思考、不去审判或做决定，只是执行，只是变得更加锋利。\n\n\n',
+    meta: [
+      ['序列', '第3'],
+      ['司掌', '处决'],
+      ['关联', '亚当·索罗斯 · 维斯冈特帝国 · 序列']
+    ]
+  },
+  'sequence': {
+    zh: '序列', en: 'Sequence', kind: '概念',
+    aliases: ['神序列', '序列体系', '序列持有者', '序列'],
+    summary: '维斯冈特帝国的持有者/装甲排名系统。每一个序列对应一个被铎激发的持有者，序列越高，意味着该持有者在帝国军政与神话叙事中的地位越关键。序列名由维斯冈特神话体系中的神名代表。\n\n前序列持有者中部分人有以神名或序号（而非本名）称呼对方的习惯。已知高位序列包括：第3 奥尔希特（亚当）、第5 维厄海姆（伊萨克）、第6 多恩丽赫（菲尔希尔德）、第21 伊什薇（阿尔瑟斯）。',
+    meta: [
+      ['类型', '体系 · 编号'],
+      ['关联', '维斯冈特帝国 · 装甲 · 神话']
+    ]
+  },
+  'first-quake': {
+    zh: '第一次地动', en: 'The First Quake', kind: '事件',
+    aliases: ['第一次地动', '地动事件'],
+    summary: '蜂巢对铎扰动的第一次大型试验。实验的阶段性目的在于证明可以通过特定方式激活铎矿、造成地壳形变。最终目的是引爆灰海海底的大型矿脉（即光海计划），影响西大陆，让央联失去大部分作战与反抗能力。\n\n少数人（诸如爱丽丝）怀疑此次事件可能为人为，罪魁祸首极可能是帝国。也是易渊主动请命渗透帝国、并最终提前揭露光海计划的直接起因。',
+    meta: [
+      ['类型', '试验 · 地质事件'],
+      ['关联', '蜂巢 · 光海 · 爱丽丝']
+    ]
+  },
+  'environment-coupling': {
+    zh: '环境耦合', en: 'Environment Coupling', kind: '现象',
+    aliases: ['环境耦合'],
+    summary: '在矿区、富集地层、光海计划环境下，流金系统能部分借用外界大规模场/矿脉活性，对持有者与装甲起到增幅作用。奥巴努·奥古布在瓦拉尔行动中与铎矿融合、进入全金属化超限状态拖住亚当·索罗斯，即是该现象的极端例子。光海计划与第一次地动均建立在大规模耦合原理之上。',
+    meta: [
+      ['关联', '铎 · 矿脉 · 光海 · 地动']
+    ]
+  },
+  'nandao-war': {
+    zh: '南岛战争', en: 'The Southern Isles War', kind: '事件',
+    aliases: ['南岛战争', '热海战争'],
+    quote: '新型战争的试验田，混乱时代中混乱的一部分，光海的不详预兆，以弱胜强的经典案例。',
+    fileRef: '11-IDX-EVT-NDW',
+    summary: '又称热海战争。雁历 71 年开始于紫色栈桥的炮击，80 年于帝国正式撤军后告终，跨度近十年，是央联沉默期内最重要的代理人战争，也是后来光海事件最直接的预兆之一。\n\n维斯冈特帝国以"热海远征联合司令部"统筹陆/海/空/特战四军种协同登陆，主力为第九军，下设两个山地/两栖师、持有者特殊机动旅与远征炮兵群，舰队以航母打击群为核心，乌维文象征性参战。72-74 年，帝国以闪电推进先后控制胡里木岛、月食岛多数港口与平原，并扶植以建筑师为代表的亲帝国整合派试图建立一个"可持续的附属秩序"。\n\n74 年末至 75 年初的雾之山战役是战争的第一个转折点：母亲与泰奥·巴拉卡借助杜乌兰山脉的雨季山洪与情报优势，在杜乌兰山中以少胜多重创第九军第二机动师，标志着南岛反抗力量正式进入成建制军队、战争进入反叛乱阶段。此后剑草与赤蕊由奥巴努彻底整合为统一联盟。\n\n78 年 12 月 1 日，母亲与 11 局联手刺杀建筑师并焚毁红鹭馆，斩断了帝国柔性同化路线最后的政治可能性。次年初的瓦拉尔行动是第二个、也是决定性的转折点：母亲在该役中与铎矿融合自爆、拖住亚当·索罗斯；同日反抗军在月食岛宣告建国，央联联合西大陆十四国发布《就南岛局势及热海航路安全之联合声明》，公开介入；行动部配合反抗军完成对帝国登陆部队的反围剿。其后第九军司令部暗杀事件（易渊与亚当首次正面相遇，二十三秒）成为帝国军在南岛最后一次重大政治失血。\n\n80 年帝国正式撤军，南岛新秩序开始建立。该战争后来被视为现代匿名战争的范本，11 局在其中以约 500 人混编部队完成了从匿名渗透到不完全匿名作战的两阶段任务。',
+    meta: [
+      ['时间', '雁历 71 年 — 80 年'],
+      ['战场', '南岛 (胡里木岛 · 月食岛 · 离岛)'],
+      ['主要交战方', '维斯冈特帝国 / 乌维文 vs. 南岛反抗军 (剑草 + 赤蕊) + 央联 11 局'],
+      ['关键节点', '紫色栈桥炮击 · 雾之山战役 · 建筑师之死 · 瓦拉尔行动 · 第九军司令部暗杀'],
+      ['关联', '奥巴努 · 易渊 · 亚当·索罗斯 · 建筑师 · 第九军 · 行动部']
+    ]
+  },
+  'longnight': {
+    zh: '长夜危机', en: 'The Long Night', kind: '事件',
+    aliases: ['长夜危机', '长夜'],
+    summary: '雁历七十年代发生在央联内部的一次大规模持有者叛乱与情报机构内乱事件。第11局在这场危机中承担了最危险的一线指挥责任，付出了大量伤亡。事件之后，央联建立了新一套监察与特设机构秩序——也是这之后，第11局对易渊真正放手让他走上行动部指挥官位置。',
+    meta: [
+      ['时间', '雁历七十年代'],
+      ['关联', '第11局 · 央联监察体系']
+    ]
+  },
+  'ronez-war': {
+    zh: '北陆战争 / 昂德斯沃尔战争', en: 'Northern Continent War', kind: '事件',
+    aliases: ['罗兹涅战争', '北陆战争'],
+    summary: '央联军队北上击溃罗兹涅旧政权的那场战争。战争结束后罗兹涅作为国家不再存在，原罗兹涅人长期被作为"前罗兹涅"身份处于灰色地带。这场战争是易渊少年时期被卷入军队、之后又作为流浪者南下的直接背景。',
+    meta: [
+      ['时间', '雁历六十年代末'],
+      ['关联', '罗兹涅 · 第七特别行动局']
+    ]
+  }
+};
+
+// Build alias lookup: longest aliases first so we don't match "罗兹涅" inside "罗兹涅战争"
+const WIKI_ALIAS_MAP = (() => {
+  const entries = [];
+  for (const slug of Object.keys(WIKI_PAGES)) {
+    for (const a of (WIKI_PAGES[slug].aliases || [])) entries.push([a, slug]);
+  }
+  // 易渊 → his own subpage (the timeline hero is rendered at #/p/yiyuan)
+  entries.push(['易渊', 'yiyuan']);
+  entries.sort((a, b) => b[0].length - a[0].length);
+  return entries;
+})();
+
+// resolve a slug to its href; home (#/) is the catalog index
+function wikiHref(slug) { return `#/p/${slug}`; }
+
+// Linkify: takes ALREADY-ESCAPED html, wraps occurrences of wiki aliases in <a class="wiki-link">.
+// To avoid double-wrapping, we walk text outside of any <a> we already inserted.
+function linkifyWiki(escapedHtml) {
+  if (!escapedHtml) return '';
+  let out = escapedHtml;
+  for (const [alias, slug] of WIKI_ALIAS_MAP) {
+    // Only first occurrence per chunk gets linked, to avoid noise. Use a regex with negative lookbehind for already-linked.
+    const escAlias = alias.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    // Match alias not already inside an <a ...>...alias...</a>; we use a placeholder split approach.
+    const re = new RegExp(`(?<![\\w])${escAlias}(?![^<]*</a>)`, '');
+    if (re.test(out)) {
+      out = out.replace(re, `<a class="wiki-link" href="${wikiHref(slug)}">${alias}</a>`);
+    }
+  }
+  return out;
+}
+
+function detailHtml(d) {
+  if (!d) return '';
+  // On 易渊's own page (the timeline hero), don't auto-link his name
+  return d.split('\n\n').map(p => `<p>${linkifyWikiExclude(esc(p), 'yiyuan')}</p>`).join('');
+}
+
+// Asset path mapper — exploration is in /explorations/ so "assets/x" → "assets/x" (we copied)
+function assetPath(p) {
+  if (!p) return '';
+  return p.startsWith('assets/') ? p : p;
+}
+
+// Walk nodes in order, splitting into chapters with their opener (if any)
+function buildChapters() {
+  const chapters = [];
+  const seen = new Map();
+  for (const n of NODES) {
+    if (!seen.has(n.chapterEn)) {
+      const idx = chapters.length;
+      seen.set(n.chapterEn, idx);
+      chapters.push({ chapter: n.chapter, chapterEn: n.chapterEn, opener: null, nodes: [] });
+    }
+    const ch = chapters[seen.get(n.chapterEn)];
+    if (isOpener(n)) ch.opener = n;
+    else ch.nodes.push(n);
+  }
+  return chapters;
+}
+const chapters = buildChapters();
+
+// =========== A · CINEMA ===========
+function renderCinema() {
+  const root = document.getElementById('var-cinema');
+  const hero = `
+    <section class="cin-hero">
+      <div class="cin-tc">
+        <span>FILE-REF · 11-OPS-Δ-0001</span>
+        <span class="tc-red">REC · 雁历 81 · CLEARANCE: ONYX</span>
+        <span>00:00:00:00</span>
+      </div>
+      <div class="cin-name-block">
+        <div class="cin-name-row">
+          <div class="cin-fileid">
+            <div><strong>SUBJECT</strong></div>
+            <div>真名 · 不详</div>
+            <div>代号 · YI YUAN</div>
+            <div>序列零</div>
+          </div>
+          <div>
+            <h1 class="cin-zh">易渊</h1>
+            <div class="cin-en"><span>YI YUAN</span><span class="en-aka">non-holder · sequence zero</span></div>
+          </div>
+        </div>
+        <div class="cin-quote">
+          死亡是不需要练习的，因此努力活下去吧。
+          <div class="q-attr">— 伊恩·诺亚，临终遗言 · 雁历 68</div>
+        </div>
+      </div>
+    </section>
+  `;
+
+  let body = '';
+  chapters.forEach((ch, i) => {
+    // Opener — full-bleed if poster, else regular chapter divider
+    if (ch.opener && ch.opener.poster) {
+      const op = ch.opener;
+      body += `
+        <section class="cin-opener">
+          <figure class="cin-opener-poster">
+            <img src="${assetPath(op.poster)}" alt="${esc(op.title || '')}" loading="lazy" />
+            <figcaption class="cin-opener-poster-meta">
+              <span>POSTER · ${esc(op.code || '')}</span>
+              <span>${esc(op.year || '')}</span>
+            </figcaption>
+          </figure>
+          <div class="cin-opener-inner">
+            <div class="cin-opener-tc">
+              <span>CHAPTER ${String(i+1).padStart(2,'0')} / ${chapters.length}</span>
+              <span>${esc(op.code || '')}</span>
+              <span>${esc(op.year || '')}</span>
+            </div>
+            <div class="cin-opener-num">${String(i+1).padStart(2,'0')}</div>
+            <div class="cin-opener-foot">
+              <div class="cin-opener-titles">
+                <span class="cin-opener-zh">${esc(op.title || ch.chapter)}</span>
+                <span class="cin-opener-en">${esc(op.titleEn || ch.chapterEn)}</span>
+              </div>
+              <p class="cin-opener-summary">${esc(op.summary || '')}</p>
+              ${op.detail ? `<div class="cin-opener-detail">${detailHtml(op.detail)}</div>` : ''}
+              <div class="cin-opener-tags">${(op.tags||[]).map(t => `<span>${esc(t)}</span>`).join('')}</div>
+            </div>
+          </div>
+        </section>
+      `;
+    } else {
+      // Use opener if exists (no poster), otherwise just chapter banner
+      const op = ch.opener;
+      body += `
+        <section class="cin-chapter">
+          <div class="cin-chapter-meta">
+            <span>CHAPTER ${String(i+1).padStart(2,'0')} / ${chapters.length}</span>
+            <span>${esc((op && op.year) || ch.nodes[0]?.year || '')}</span>
+          </div>
+          <div class="cin-chapter-num">${String(i+1).padStart(2,'0')}</div>
+          <div class="cin-chapter-title">
+            <span class="cin-chapter-zh">${esc(ch.chapter)}</span>
+            <span class="cin-chapter-en">${esc(ch.chapterEn)}</span>
+          </div>
+          ${op && op.summary ? `<p class="cin-body-summary" style="margin-top:32px; max-width:840px;">${esc(op.summary)}</p>` : ''}
+          ${op && op.detail ? `<div class="cin-body-detail" style="max-width:840px;">${detailHtml(op.detail)}</div>` : ''}
+        </section>
+      `;
+    }
+
+    ch.nodes.forEach((n, j) => {
+      let media = '';
+      if (n.portrait) {
+        media += `
+          <figure class="cin-portrait">
+            <img src="${assetPath(n.portrait.src)}" alt="${esc(n.portrait.alt || '')}" loading="lazy" />
+            <figcaption class="cin-portrait-meta">
+              <span>${esc(n.portrait.tc || '')}</span>
+              <span>${esc(n.portrait.label || '')}</span>
+            </figcaption>
+          </figure>
+        `;
+      }
+      if (n.storyboard) {
+        media += `
+          <div class="cin-storyboard">
+            <div class="cin-sb-label">${esc(n.storyboard.titleEn || '')} · ${esc(n.storyboard.title || '')}</div>
+            <div class="cin-sb-grid">
+              ${n.storyboard.frames.map(f => `
+                <figure class="cin-sb-frame">
+                  <img src="${assetPath(f.src)}" alt="" loading="lazy" />
+                  <figcaption class="cin-sb-frame-meta">
+                    <span>${esc(f.tc || '')}</span>
+                    <span>${esc(f.label || '')}</span>
+                  </figcaption>
+                </figure>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+      body += `
+        <article class="cin-node">
+          <div class="cin-node-inner">
+            <aside class="cin-side">
+              <div class="cin-side-num">${String(j+1).padStart(2,'0')}</div>
+              <div class="side-row"><span>CODE</span><span>${esc(n.code || '')}</span></div>
+              <div class="side-row"><span>YEAR</span><span>${esc(n.year || '')}</span></div>
+              <div class="side-row"><span>AGE</span><span>${esc(n.age || '')}</span></div>
+              ${n.location ? `<div class="side-row"><span>LOC</span><span>${esc(n.location)}</span></div>` : ''}
+            </aside>
+            <div class="cin-body">
+              <div class="cin-body-meta">${esc(n.chapterEn)} · NODE ${String(j+1).padStart(2,'0')}</div>
+              <h3 class="cin-body-title">${esc(n.title || '')}</h3>
+              <div class="cin-body-titleen">${esc(n.titleEn || '')}</div>
+              <p class="cin-body-summary">${esc(n.summary || '')}</p>
+              ${n.quote ? `<blockquote class="cin-quote-block">${esc(n.quote)}${n.quoteAttr ? `<span class="qa">${esc(n.quoteAttr)}</span>` : ''}</blockquote>` : ''}
+              <div class="cin-body-detail">${detailHtml(n.detail)}</div>
+              ${media}
+              <div class="cin-tags">${(n.tags||[]).map(t => `<span>${esc(t)}</span>`).join('')}</div>
+            </div>
+          </div>
+        </article>
+      `;
+    });
+  });
+  root.innerHTML = hero + body;
+}
+
+// =========== C · TERMINAL ===========
+function renderTerminal() {
+  const root = document.getElementById('var-terminal');
+  const status = `
+    <div class="term-statusbar">
+      <div>FILE-REF · <strong>11-OPS-Δ-0001</strong></div>
+      <div>SUBJECT · <strong>YI YUAN</strong></div>
+      <div>CLEARANCE · <strong>ONYX</strong></div>
+      <div class="stat-live">REC · 雁历 81</div>
+    </div>
+  `;
+  const hero = `
+    <section class="term-hero">
+      <aside class="term-hero-left">
+        <div class="h-label">PROFILE</div>
+        <div class="h-val">非持有者</div>
+        <div class="h-val">序列零</div>
+        <div class="h-label">RANK</div>
+        <div class="h-val">少校 (公开)</div>
+        <div class="h-label">UNIT</div>
+        <div class="h-val">11-OPS / Δ</div>
+        <div class="h-label">WEAPON</div>
+        <div class="h-val">长直刀</div>
+        <div class="h-label">HEIGHT</div>
+        <div class="h-val">183 CM</div>
+        <div class="h-label">EYES</div>
+        <div class="h-val">暗红</div>
+      </aside>
+      <div class="term-hero-right">
+        <div class="term-hero-id"><span>SUBJECT // YI YUAN</span><span>STATUS // ACTIVE</span></div>
+        <div>
+          <h1 class="term-hero-zh">易渊</h1>
+          <div class="term-hero-en">
+            <span>YI YUAN</span>
+            <span class="en-aka">真名 · 不详 · sequence zero</span>
+          </div>
+        </div>
+        <blockquote class="term-hero-quote">
+          死亡是不需要练习的，因此努力活下去吧。
+          <span class="qa">— 伊恩·诺亚，临终遗言 · 雁历 68</span>
+        </blockquote>
+      </div>
+    </section>
+  `;
+
+  // Faction map: which logo flies above each chapter
+  const FACTIONS = {
+    rozne:   { id: 'rozne',   src: 'assets/rozne-logo.png',         zh: '罗兹涅共和国',     en: 'THE HOLY REPUBLIC OF ROZNE' },
+    cu:      { id: 'cu',      src: 'assets/centralunion-logo.png',  zh: '中央联合政体',     en: 'THE CENTRAL UNION POLITY' },
+    visgant: { id: 'visgant', src: 'assets/visgant-logo.png',       zh: '维斯冈特帝国',     en: 'THE EMPIRE OF WIESCAUTE' },
+  };
+  const CHAPTER_FACTION = {
+    'I. ORIGIN':                          'rozne',
+    'II. IN THE ANDESVOLL MOUNTAINS':     'rozne',
+    'III. TEN YEARS AT THE 11TH BUREAU':  'cu',
+    'IV. HOT SEA':                        'cu',
+    'V. JUDGMENT':                        'cu',
+    'VI. THE HIVE':                       'visgant',
+    'VII. THE CROWN OF AURSICHT IS YOURS':'visgant',
+    'VIII. SEA OF LIGHT':                 'visgant',
+  };
+  const HIDDEN_CHAPTERS = new Set();
+  const EPILOGUE_CHAPTERS = new Set(['IX. AFTER']);
+
+  // Build faction spans: consecutive (visible) NON-epilogue chapters sharing a faction.
+  // Epilogue chapters are kept aside so they render OUTSIDE any faction span (no banner).
+  const visible = chapters.filter(c => !HIDDEN_CHAPTERS.has(c.chapterEn));
+  const spans = [];
+  const epilogueChapters = [];
+  visible.forEach(ch => {
+    if (EPILOGUE_CHAPTERS.has(ch.chapterEn)) { epilogueChapters.push(ch); return; }
+    const fid = CHAPTER_FACTION[ch.chapterEn];
+    const last = spans[spans.length - 1];
+    if (last && last.fid === fid) last.chapters.push(ch);
+    else spans.push({ fid, chapters: [ch] });
+  });
+
+  let body = '';
+  spans.forEach((span, sIdx) => {
+    const faction = FACTIONS[span.fid];
+    const factionHero = faction ? `
+      <div class="term-faction-mark" data-faction="${faction.id}">
+        <img src="${faction.src}" alt="${esc(faction.zh)}" />
+        <div class="term-faction-cap">
+          <div class="term-faction-zh">${esc(faction.zh)}</div>
+          <div class="term-faction-en">${esc(faction.en)}</div>
+        </div>
+      </div>
+      <div class="term-faction-spacer"></div>
+    ` : '';
+
+    body += `<section class="term-faction-span faction-${faction.id}" data-faction="${faction.id}">${factionHero}`;
+
+    span.chapters.forEach(ch => {
+      const i = chapters.indexOf(ch);
+      const isHive = ch.chapterEn === 'VI. THE HIVE';
+      const isSeaLight = ch.chapterEn === 'VIII. SEA OF LIGHT';
+      const blockClasses = ['term-chapter-block'];
+      if (isHive) blockClasses.push('is-hive');
+      if (isSeaLight) blockClasses.push('is-sealight', 'sl-mode-' + (document.body.dataset.slMode || 'ghost'));
+
+      body += `<section class="${blockClasses.join(' ')}" data-chapter="${esc(ch.chapterEn)}"><div class="term-chapter-inner">${isSeaLight ? '<div class="sl-tide"></div>' : ''}`;
+
+      if (ch.opener && ch.opener.poster) {
+        const op = ch.opener;
+        body += `
+          <section class="term-opener">
+            <div class="term-opener-img" data-ref="${esc(op.code || '')}" style="background-image: url('${assetPath(op.poster)}')"><div class="term-crt-overlay"></div></div>
+            <div class="term-opener-mid">
+              <div class="term-opener-meta">
+                <span>CHAPTER · ${String(i+1).padStart(2,'0')} / ${chapters.length}</span>
+                <span>${esc(op.year || '')}</span>
+              </div>
+              <div class="term-opener-num">${String(i+1).padStart(2,'0')}</div>
+              <div class="term-opener-titles">
+                <h2 class="term-opener-zh">${esc(op.title || ch.chapter)}</h2>
+                <div class="term-opener-en">// ${esc(op.titleEn || ch.chapterEn)}</div>
+                <div class="term-opener-summary">${detailHtml(op.summary || '')}</div>
+                ${op.detail ? `<div class="term-opener-detail">${detailHtml(op.detail)}</div>` : ''}
+                <div class="term-opener-tags">${(op.tags||[]).map(t => `<span>${esc(t)}</span>`).join('')}</div>
+              </div>
+            </div>
+          </section>
+        `;
+      } else {
+        const op = ch.opener;
+        body += `
+          <section class="term-chapter">
+            <div class="term-chapter-tick"></div>
+            <div class="term-chapter-mid">
+              <div class="term-chapter-meta">
+                <span>CHAPTER · ${String(i+1).padStart(2,'0')} / ${chapters.length}</span>
+                <span>${esc((op && op.year) || ch.nodes[0]?.year || '')}</span>
+              </div>
+              <div class="term-chapter-numrow">
+                <div class="term-chapter-num">${String(i+1).padStart(2,'0')}</div>
+                ${ch.chapterEn === 'III. TEN YEARS AT THE 11TH BUREAU' ? `<img class="term-chapter-emblem" src="assets/bureau11-logo.png" alt="第十一特别行动局" />` : ''}
+              </div>
+              <div class="term-chapter-titles">
+                <span class="term-chapter-zh">${esc(ch.chapter)}</span>
+                <span class="term-chapter-en">// ${esc(ch.chapterEn)}</span>
+              </div>
+              ${op && op.summary ? `<p class="term-node-summary" style="margin-top:24px;">${esc(op.summary)}</p>` : ''}
+              ${op && op.detail ? `<div class="term-node-detail">${detailHtml(op.detail)}</div>` : ''}
+            </div>
+            <div class="term-chapter-tick"></div>
+          </section>
+        `;
+      }
+
+      ch.nodes.forEach((n, j) => {
+        let media = '';
+      if (n.portrait) {
+        media += `
+          <figure class="term-portrait">
+            <img src="${assetPath(n.portrait.src)}" alt="${esc(n.portrait.alt || '')}" loading="lazy" />
+            <figcaption class="term-portrait-meta">
+              <span>${esc(n.portrait.tc || '')}</span>
+              <span>${esc(n.portrait.label || '')}</span>
+            </figcaption>
+          </figure>
+        `;
+      }
+      if (n.storyboard) {
+        media += `
+          <div class="term-storyboard">
+            <div class="term-sb-label">▸ ${esc(n.storyboard.titleEn || '')} · ${esc(n.storyboard.title || '')}</div>
+            <div class="term-sb-grid">
+              ${n.storyboard.frames.map(f => `
+                <figure class="term-sb-frame">
+                  <img src="${assetPath(f.src)}" alt="" loading="lazy" />
+                  <figcaption class="term-sb-frame-meta">
+                    <span>${esc(f.tc || '')}</span>
+                    <span>${esc(f.label || '')}</span>
+                  </figcaption>
+                </figure>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+      body += `
+        <article class="term-node">
+          <div class="term-node-num">NODE<span>${String(j+1).padStart(2,'0')}</span></div>
+          <div class="term-node-body">
+            <header class="term-node-head">
+              <div>CODE<strong>${esc(n.code || '')}</strong></div>
+              <div>YEAR<strong>${esc(n.year || '')}</strong></div>
+              <div>AGE<strong>${esc(n.age || '')}</strong></div>
+            </header>
+            <div class="term-node-title">
+              <h3 class="term-node-zh">${esc(n.title || '')}</h3>
+              <span class="term-node-en">// ${esc(n.titleEn || '')}</span>
+            </div>
+            ${n.location ? `<div class="term-node-loc">▸ ${esc(n.locationEn || '')} · ${esc(n.location)}</div>` : ''}
+            <p class="term-node-summary">${esc(n.summary || '')}</p>
+            <div class="term-node-detail">${detailHtml(n.detail)}</div>
+            ${n.quote ? `<blockquote class="term-quote">${esc(n.quote)}${n.quoteAttr ? `<span class="qa">${esc(n.quoteAttr)}</span>` : ''}</blockquote>` : ''}
+            ${media}
+            <div class="term-tags">${(n.tags||[]).map(t => `<span>${esc(t)}</span>`).join('')}</div>
+          </div>
+          <div class="term-node-rule"></div>
+        </article>
+      `;
+      });
+
+      body += `</div></section>`;
+    });
+
+    body += `</section>`;
+  });
+
+  // Epilogue: rendered as bare chapter blocks OUTSIDE any faction span, so no
+  // sticky banner appears for them. Stripped-down layout — only chapter title,
+  // a quiet summary, optional quote, no node grid.
+  epilogueChapters.forEach(ch => {
+    const op = ch.opener || (ch.nodes && ch.nodes[0]) || {};
+    body += `
+      <section class="term-chapter-block is-epilogue" data-chapter="${esc(ch.chapterEn)}">
+        <div class="term-chapter-inner">
+          <section class="term-epilogue">
+            <div class="term-epilogue-rule"></div>
+            <div class="term-epilogue-meta">${esc(op.year || '')} · ${esc(op.code || '')}</div>
+            <h2 class="term-epilogue-zh">${esc(op.title || ch.chapter)}</h2>
+            <div class="term-epilogue-en">// ${esc(op.titleEn || ch.chapterEn)}</div>
+            ${op.summary ? `<p class="term-epilogue-summary">${esc(op.summary)}</p>` : ''}
+            ${op.detail ? `<div class="term-epilogue-detail">${detailHtml(op.detail)}</div>` : ''}
+            ${op.quote ? `<blockquote class="term-epilogue-quote">${esc(op.quote)}${op.quoteAttr ? `<span class="qa">${esc(op.quoteAttr)}</span>` : ''}</blockquote>` : ''}
+            <div class="term-epilogue-end">— 档案之外 / OFF THE RECORD —</div>
+          </section>
+        </div>
+      </section>
+    `;
+  });
+
+  const topbar = `
+    <div class="term-topbar" style="position:sticky;top:46px;z-index:51;display:flex;justify-content:space-between;align-items:center;padding:8px 24px;border-bottom:1px solid var(--term-rule-soft);background:var(--term-bg-2);backdrop-filter:blur(6px);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--term-fg-dim);">
+      <a href="#/" style="color:var(--term-accent);text-decoration:none;letter-spacing:0.22em;border-bottom:1px solid color-mix(in srgb, var(--term-accent) 40%, transparent);padding-bottom:1px;">← 词条目录 / INDEX</a>
+      <span>INDEX / <strong style="color:var(--term-fg);font-weight:500;">易渊 · YI YUAN</strong></span>
+    </div>
+  `;
+  // Push the recording status bar below the topbar
+  const statusAdjusted = status.replace('top: 46px', 'top: 79px').replace('class="term-statusbar"', 'class="term-statusbar" style="top:79px"');
+  root.innerHTML = topbar + statusAdjusted + hero + body;
+}
+
+renderTerminal();
+
+// =========== D · WIKI sub-page render + router ===========
+
+// Per-entry status bar (出现在所有词条顶部). Returns the recording-style sticky bar.
+function docStatusBarHtml(slug, page, isYiyuan) {
+  const KIND_PREFIX = {
+    '人物': 'PER', '组织': 'ORG', '地点': 'LOC', '事件': 'EVT',
+    '物质': 'MAT', '装备': 'EQP', '概念': 'CON', '现象': 'PHN'
+  };
+  const slugs = Object.keys(WIKI_PAGES);
+  const idx = slugs.indexOf(slug) + 1;
+  const num = String(idx).padStart(4, '0');
+  const kp = KIND_PREFIX[page.kind] || 'IDX';
+  const fileRef = page.fileRef || `11-IDX-${kp}-${num}`;
+  const subjBase = (page.en || page.zh || slug).toUpperCase();
+  const clearance = page.clearance || 'ONYX';
+  return `
+    <div class="term-statusbar">
+      <div>FILE-REF · <strong>${esc(fileRef)}</strong></div>
+      <div>SUBJECT · <strong>${esc(subjBase)}</strong></div>
+      <div>CLEARANCE · <strong>${esc(clearance)}</strong></div>
+      <div class="stat-live">REC · 雁历 81</div>
+    </div>
+  `;
+}
+
+function renderWiki(slug) {
+  const root = document.getElementById('var-wiki');
+  const page = WIKI_PAGES[slug];
+  if (!page) {
+      root.innerHTML = `
+      ${docStatusBarHtml(slug, {kind: '未知', en: slug, zh: slug, clearance: '404'}, false)}
+      <div class="wiki-topbar">
+        <a class="wiki-back" href="#/">← 词条目录</a>
+        <span class="wiki-crumb">条目不存在 · ${esc(slug)}</span>
+      </div>
+      <div class="wiki-page">
+        <div class="wiki-empty">未找到该条目。</div>
+      </div>
+    `;
+    return;
+  }
+
+  // Find related timeline nodes — any node whose summary/detail/title mentions one of this page's aliases.
+  const aliases = page.aliases || [];
+  const related = NODES.filter(n => {
+    if (isOpener(n)) return false; // skip openers/epilogue, list real nodes
+    const blob = (n.title || '') + ' ' + (n.summary || '') + ' ' + (n.detail || '');
+    return aliases.some(a => blob.includes(a));
+  }).slice(0, 12);
+
+  const summaryHtml = page.summary
+    ? page.summary.split('\n\n').map(p => `<p>${linkifyWikiExclude(esc(p), slug)}</p>`).join('')
+    : '<p class="wiki-empty">// 待补完</p>';
+
+  const metaHtml = (page.meta || []).map(([k, v]) =>
+    `<div class="wm-row"><div class="wm-key">${esc(k)}</div><div class="wm-val">${linkifyWikiExclude(esc(v), slug)}</div></div>`
+  ).join('');
+
+  const relatedHtml = related.length
+    ? related.map(n => `
+        <li>
+          <span class="wr-code">${esc((n.code || '').split('/')[0].trim())}</span>
+          <a href="#/" data-node-id="${esc(n.id)}">${esc(n.title)}</a>
+          <span class="wr-chap">${esc(n.chapterEn || '')}</span>
+        </li>
+      `).join('')
+    : '<div class="wiki-empty">暂无关联时间线条目。</div>';
+
+  root.innerHTML = `
+    ${docStatusBarHtml('yiyuan', WIKI_PAGES.yiyuan, true)}
+    <div class="wiki-topbar">
+      <a class="wiki-back" href="#/">← 词条目录</a>
+      <span class="wiki-crumb">INDEX / <strong>${esc(page.zh)}</strong></span>
+    </div>
+    ${page.profile ? renderProfileHero(page, slug, summaryHtml) : `
+    <div class="wiki-page">
+      <div class="wiki-kind">
+        <span>${esc(page.kind || '条目')}</span>
+        <span class="wk-slug">// ${esc(slug.toUpperCase())}</span>
+      </div>
+      <h1 class="wiki-zh">${esc(page.zh)}</h1>
+      <div class="wiki-en">${esc(page.en)}</div>
+      ${page.logo ? `<div class="wiki-faction-logo"><img src="${esc(page.logo)}" alt="${esc(page.zh)} logo"></div>` : ''}
+      <div class="wiki-summary">${summaryHtml}</div>
+      ${metaHtml ? `<div class="wiki-meta">${metaHtml}</div>` : ''}
+      <div class="wiki-related-label">相关条目 // RELATED ENTRIES</div>
+      <ul class="wiki-related-list">${relatedHtml}</ul>
+    </div>
+    `}
+    ${page.profile ? `
+    <div class="wiki-page is-profile-bottom" style="padding:0 48px;max-width:1180px;">
+      ${metaHtml ? `<div class="wiki-meta">${metaHtml}</div>` : ''}
+      <div class="wiki-related-label">相关条目 // RELATED ENTRIES</div>
+      <ul class="wiki-related-list">${relatedHtml}</ul>
+    </div>
+    ` : ''}
+  `;
+
+  // Wire related-link clicks: jump back to main timeline scrolled to that node
+  root.querySelectorAll('a[data-node-id]').forEach(a => {
+    a.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      const id = a.getAttribute('data-node-id');
+      location.hash = '#/p/yiyuan';
+      // Wait one tick for route() to switch view, then scroll to node
+      setTimeout(() => {
+        const target = document.querySelector(`#var-terminal [data-node-id="${id}"]`)
+          || Array.from(document.querySelectorAll('#var-terminal .term-node')).find(el => (el.querySelector('.term-node-zh')?.textContent || '').trim() === NODES.find(n=>n.id===id)?.title);
+        if (target) target.scrollIntoView({ block: 'start' });
+      }, 60);
+    });
+  });
+}
+
+function renderProfileHero(page, slug, summaryHtml) {
+  const stats = (page.stats || []).map(([k, v]) =>
+    `<div class="ps-row"><div class="ps-key">${esc(k)}</div><div class="ps-val">${linkifyWikiExclude(esc(v), slug)}</div></div>`
+  ).join('');
+  const quote = page.quote
+    ? `<div class="profile-quote">「${esc(page.quote)}」</div>`
+    : '';
+  const glyph = page.glyph ? ` data-glyph="${esc(page.glyph)}"` : '';
+  return `
+    <div class="profile-banner">
+      <span class="pb-mark">PROFILE / 档案</span>
+      <span class="pb-zh">${esc(page.zh)}</span>
+      <span class="pb-spacer"></span>
+      <span class="pb-tag">${esc(page.kind || '人物')}</span>
+      <span class="pb-tag">// ${esc(slug.toUpperCase())}</span>
+    </div>
+    <div class="wiki-page is-profile">
+      <div class="profile-shell">
+        <aside class="profile-side">
+          <div class="profile-portrait"${glyph}></div>
+          ${stats ? `<div class="profile-stats">${stats}</div>` : ''}
+          ${quote}
+        </aside>
+        <div class="profile-main">
+          <div class="wiki-kind">
+            <span>${esc(page.kind || '条目')}</span>
+            <span class="wk-slug">// ${esc(slug.toUpperCase())}</span>
+          </div>
+          <h1 class="wiki-zh">${esc(page.zh)}</h1>
+          <div class="wiki-en">${esc(page.en)}</div>
+          <div class="wiki-summary">${summaryHtml}</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// linkify-on-wiki-page that EXCLUDES the current slug (don't self-link)
+function linkifyWikiExclude(escapedHtml, currentSlug) {
+  if (!escapedHtml) return '';
+  let out = escapedHtml;
+  for (const [alias, slug] of WIKI_ALIAS_MAP) {
+    if (slug === currentSlug) continue;
+    const escAlias = alias.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const re = new RegExp(`(?<![\\w])${escAlias}(?![^<]*</a>)`, '');
+    if (re.test(out)) {
+      out = out.replace(re, `<a class="wiki-link" href="${wikiHref(slug)}">${alias}</a>`);
+    }
+  }
+  return out;
+}
+
+// =========== E · CATALOG render ===========
+function renderCatalog() {
+  const root = document.getElementById('var-catalog');
+
+  // Group by `kind`. Within 人物, sub-group by faction (from meta.阵营 first segment).
+  const KIND_ORDER = [
+    { key: '人物', en: 'PERSONAE', label: 'I' },
+    { key: '组织', en: 'ORGANIZATIONS', label: 'II' },
+    { key: '国家', en: 'NATIONS', label: 'III' },
+    { key: '事件', en: 'EVENTS', label: 'IV' },
+    { key: '物质', en: 'MATERIALS', label: 'V' },
+    { key: '装备', en: 'EQUIPMENT', label: 'VI' },
+    { key: '概念', en: 'CONCEPTS', label: 'VII' },
+    { key: '现象', en: 'PHENOMENA', label: 'VIII' }
+  ];
+
+  // Faction ordering for 人物 sub-grouping (matches the timeline factions roughly)
+  const FACTION_ORDER = [
+    { key: '中央 / 11局', match: /(\u592e\u8054|11\u5c40|\u7b2c11\u5c40|\u4e2d\u592e)/, en: 'CENTRAL UNION & BUREAU 11' },
+    { key: '维斯冈特帝国', match: /(\u7ef4\u65af\u5188\u7279|\u8702\u5de2|\u7d22\u7f57\u65af\u5bb6|\u7687\u5ba4|\u5e1d\u56fd|\u7b2c\u4e5d\u519b)/, en: 'WIESCAUTE EMPIRE' },
+    { key: '罗兹涅 (前)', match: /\u7f57\u5179\u6d85/, en: 'ROZNE (FORMER)' },
+    { key: '南岛', match: /(南岛|剑草|赤蕊|帝国占领区|赛汶)/, en: 'SOUTHERN ISLES' },
+    { key: '瓦伦图', match: /(瓦伦图)/, en: 'VARENTÚ' },
+    { key: '其他', match: /.*/, en: 'OTHERS' }
+  ];
+
+  function factionOf(page) {
+    const aff = (page.meta || []).find(([k]) => k === '阵营' || k === '出身');
+    return aff ? aff[1] : '';
+  }
+  function factionGroupKey(page) {
+    const f = factionOf(page);
+    for (const g of FACTION_ORDER) if (g.match.test(f)) return g.key;
+    return '其他';
+  }
+
+  // Build buckets
+  const buckets = {}; // kind -> entries
+  for (const slug of Object.keys(WIKI_PAGES)) {
+    const p = WIKI_PAGES[slug];
+    const k = p.kind || '其他';
+    (buckets[k] = buckets[k] || []).push({ slug, page: p });
+  }
+
+  let html = '';
+  html += `<div class="cat-wrap">`;
+  html += `<div class="cat-topbar">
+    <a class="cat-back" href="#/p/yiyuan">→ 主档案 · 易渊</a>
+    <span>FILE-REF · 11-OPS-INDEX-A</span>
+  </div>`;
+  html += `<h1 class="cat-title">词条目录</h1>`;
+  html += `<div class="cat-subtitle">// CATALOG · ALL ENTRIES</div>`;
+  const total = Object.keys(WIKI_PAGES).length;
+  html += `<div class="cat-meta">TOTAL · <strong>${total}</strong> ENTRIES &nbsp;·&nbsp; ${KIND_ORDER.filter(k => buckets[k.key]).length} CATEGORIES</div>`;
+
+  for (const ko of KIND_ORDER) {
+    const entries = buckets[ko.key];
+    if (!entries || !entries.length) continue;
+
+    html += `<section class="cat-section">`;
+    html += `<div class="cat-section-head">
+      <div class="cat-section-label">§ ${ko.label}</div>
+      <h2 class="cat-section-title">${ko.key}<span class="cs-en">${ko.en}</span><span class="cs-count">[${entries.length}]</span></h2>
+    </div>`;
+    html += `<div class="cat-tree">`;
+
+    if (ko.key === '人物') {
+      // Sub-group by faction
+      const byFaction = {};
+      for (const e of entries) {
+        const fk = factionGroupKey(e.page);
+        (byFaction[fk] = byFaction[fk] || []).push(e);
+      }
+      for (const fg of FACTION_ORDER) {
+        const list = byFaction[fg.key];
+        if (!list || !list.length) continue;
+        html += `<div class="cat-group">`;
+        html += `<div class="cat-group-label">${fg.key} <span style="opacity:0.5;">/ ${fg.en}</span></div>`;
+        for (const e of list) html += renderCatalogRow(e.slug, e.page);
+        html += `</div>`;
+      }
+    } else {
+      html += `<div class="cat-group">`;
+      for (const e of entries) html += renderCatalogRow(e.slug, e.page);
+      html += `</div>`;
+    }
+
+    html += `</div></section>`;
+  }
+  html += `</div>`;
+
+  root.innerHTML = html;
+}
+
+function renderCatalogRow(slug, page) {
+  const glyph = page.glyph
+    ? `<div class="cr-glyph">${esc(page.glyph)}</div>`
+    : `<div class="cr-glyph cr-glyph-empty">·</div>`;
+  const tag = (() => {
+    const t = (page.meta || []).find(([k]) => k === '关键词' || k === '身份' || k === '类型' || k === '状态' || k === '时间');
+    if (t) return esc((t[1] || '').split(/[·•]/)[0].trim());
+    const f = (page.meta || []).find(([k]) => k === '阵营');
+    if (f) return esc((f[1] || '').split(/[·•]/)[0].trim());
+    return '';
+  })();
+  return `<a class="cat-row" href="#/p/${slug}">
+    ${glyph}
+    <div><span class="cr-zh">${esc(page.zh)}</span></div>
+    <div class="cr-en">${esc(page.en || '')}</div>
+    <div class="cr-tag">${tag}</div>
+  </a>`;
+}
+
+// Router: hash format is empty (main page), #/p/<slug>, or #/catalog
+function route() {
+  const h = location.hash || '';
+  const m = h.match(/^#\/p\/([\w-]+)/);
+  const stage = document.querySelectorAll('.exp-stage > section');
+  stage.forEach(s => s.classList.remove('active'));
+  if (m) {
+    const slug = m[1];
+    if (slug === 'yiyuan') {
+      document.getElementById('var-terminal').classList.add('active');
+    } else {
+      renderWiki(slug);
+      document.getElementById('var-wiki').classList.add('active');
+    }
+    window.scrollTo(0, 0);
+  } else if (h.match(/^#\/catalog/)) {
+    renderCatalog();
+    document.getElementById('var-catalog').classList.add('active');
+    window.scrollTo(0, 0);
+  } else {
+    // home is the catalog index
+    renderCatalog();
+    document.getElementById('var-catalog').classList.add('active');
+  }
+}
+window.addEventListener('hashchange', route);
+route();
+
+// Faction logo morph: when shell scrolled past, mark gets is-pinned class
+(function setupFactionMorph(){
+  const spans = document.querySelectorAll('#var-terminal .term-faction-span');
+  const statusbar = document.querySelector('#var-terminal .term-statusbar');
+  // Morph happens over ~360px of scroll once span enters; clamp 0..1
+  const MORPH_DIST = 360;
+  function tick(){
+    // Sync sticky top with status bar bottom so there's never a gap
+    let stickyTop = 98;
+    if (statusbar) {
+      const sbR = statusbar.getBoundingClientRect();
+      stickyTop = Math.max(0, sbR.bottom);
+    }
+    spans.forEach(span => {
+      const mark = span.querySelector('.term-faction-mark');
+      if (!mark) return;
+      mark.style.top = stickyTop + 'px';
+      const rect = span.getBoundingClientRect();
+      // Progress: 0 when span just entered viewport-top, 1 after MORPH_DIST scrolled past
+      const past = -rect.top; // px scrolled past span's top
+      let p = past / MORPH_DIST;
+      if (p < 0) p = 0;
+      if (p > 1) p = 1;
+      mark.style.setProperty('--p', p.toFixed(3));
+      // Expose current banner height so first chapter inside the span can offset
+      span.style.setProperty('--banner-h', mark.offsetHeight + 'px');
+    });
+  }
+  let raf = 0;
+  window.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; tick(); }); }, { passive: true });
+  window.addEventListener('resize', tick);
+  tick();
+})();
+
+// Epilogue fade: when the post-archive chapter enters the upper portion of viewport,
+// fade out the sticky status bar + faction banners.
+(function setupEpilogueFade(){
+  const root = document.getElementById('var-terminal');
+  const epi = root && root.querySelector('.term-chapter-block.is-epilogue');
+  if (!root || !epi) return;
+  function tick(){
+    const r = epi.getBoundingClientRect();
+    // Activate when the epilogue's top crosses ~60% down the viewport
+    const active = r.top < window.innerHeight * 0.6;
+    root.classList.toggle('is-epilogue-active', active);
+  }
+  let raf = 0;
+  window.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; tick(); }); }, { passive: true });
+  window.addEventListener('resize', tick);
+  tick();
+})();
+</script>
+
+</body>
+</html>
